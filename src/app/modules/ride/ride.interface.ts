@@ -7,6 +7,7 @@ export enum RideStatus {
   InTransit = "Intransited",
   Completed = "Completed",
   Cancelled = "Cancelled",
+  NoResponse= "NoResponse"
 }
 
 export interface ILocation {
@@ -25,10 +26,13 @@ export interface IRideTimestamps {
 }
 
 export interface IRide {
-  riderId: Types.ObjectId;   // ref: "Rider"
-  driverId?: Types.ObjectId; // ref: "Driver"
+  riderId: Types.ObjectId;
+  driverId?: Types.ObjectId;
   pickupLocation: ILocation;
   destinationLocation: ILocation;
   status: RideStatus;
   timestamps: IRideTimestamps;
+
+  fare: number;                  
+  isPaymentCompleted?: boolean;   
 }

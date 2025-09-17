@@ -7,6 +7,8 @@ const riderSchema = new Schema<IRider>({
     email:{type:String,require:true},
     role:{type:String,enum:['rider'],default:'rider'},
     isBlocked:{type:Boolean}
-})
+},
+{ timestamps: true }
+)
 
-export const riderModel = model<IRider>("riderModel", riderSchema)
+export const rider = model<IRider>("rider", riderSchema)

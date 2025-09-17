@@ -10,6 +10,8 @@ const driverschema = new Schema<IDriver>({
     vehicleInfo: { type:String, enum: Object.values(Vehicle), required: true },
     Availability: { type: Boolean, required: true },
     isApproved: { type: String, enum: Object.values(IsApproved), default: IsApproved.pending },
-})
+},
+{ timestamps: true }
+)
 
-export const driverModel = model<IDriver>("driverModel", driverschema)
+export const driver = model<IDriver>("driver", driverschema)
