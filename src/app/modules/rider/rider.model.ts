@@ -3,6 +3,7 @@ import { IRider } from "./rider.interface";
 
 
 const riderSchema = new Schema<IRider>({
+    googleId:{type:String},
     name:{type:String,require:true},
     email:{type:String,require:true},
     role:{type:String,enum:['rider'],default:'rider'},
@@ -11,4 +12,4 @@ const riderSchema = new Schema<IRider>({
 { timestamps: true }
 )
 
-export const rider = model<IRider>("rider", riderSchema)
+export const Rider = model<IRider>("Rider", riderSchema)

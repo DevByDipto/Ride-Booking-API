@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 import { app } from "./app";
 import { envVars } from "./app/config/env";
 import {Server} from 'http'
-const port = envVars.PORT || 3000
+const port = envVars.PORT || 5000
 let server:Server ;
 
 async function serverStart() {

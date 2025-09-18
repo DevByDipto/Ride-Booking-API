@@ -14,4 +14,4 @@ const driverschema = new Schema<IDriver>({
 { timestamps: true }
 )
 
-export const driver = model<IDriver>("driver", driverschema)
+export const Driver = model<IDriver>("Driver", driverschema)

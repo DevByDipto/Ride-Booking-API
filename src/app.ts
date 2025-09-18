@@ -3,12 +3,33 @@ import notFound from "./app/middlewares/notFound"
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandelar"
 import cors from "cors"
 import { router } from "./app/routes"
+import session from "express-session"
+import { envVars } from "./app/config/env"
+import passport from "passport"
+import './app/config/passport'
+import { authRouter } from "./app/modules/auth/auth.route"
+
+
 export const app = express()
 
 app.use(express.json())
 app.use(cors())
-app.use('/api',router)
 
+
+app.use(session({
+  secret: envVars.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use('/api',router)
+// app.use('/api/auth', authRouter);
 
 app.get('/', (req, res) => {
   res.send('welocome to ride booking')

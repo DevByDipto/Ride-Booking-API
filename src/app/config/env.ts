@@ -1,13 +1,8 @@
 import dotenv from "dotenv"
 dotenv.config() // keno dilam ?
 
-interface EnvConfig{
-     PORT: string
-    MONGO_URI: string
-    NODE_ENV: string
-}
 
-const loadEnvVariable=():EnvConfig=>{ // aikhane to ami bole e dicchi j PORT: process.env.PORT as string mane port string hobe tahole abar EnvConfig korar dorkar kii?
+const loadEnvVariable=()=>{ // aikhane to ami bole e dicchi j PORT: process.env.PORT as string mane port string hobe tahole abar EnvConfig korar dorkar kii?
     const requredEnvVariables : string[] = ["PORT",'MONGO_URI',"NODE_ENV"]
 requredEnvVariables.forEach(key=>{
     if(!process.env[key]){
@@ -18,6 +13,9 @@ requredEnvVariables.forEach(key=>{
          PORT: process.env.PORT as string,
     MONGO_URI: process.env.MONGO_URI as string,
     NODE_ENV: process.env.NODE_ENV as string,
+    SESSION_SECRET: process.env.SESSION_SECRET as string,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
     }
 }
 

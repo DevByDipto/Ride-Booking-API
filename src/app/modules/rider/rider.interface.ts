@@ -17,6 +17,7 @@ enum RideStatus {
 }
 
 export interface IRider {
+    googleId?:string
     name: string
     email: string
     role?: "rider"
