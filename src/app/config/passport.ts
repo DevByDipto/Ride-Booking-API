@@ -3,9 +3,29 @@ import { Strategy as GoogleStrategy, Profile, VerifyCallback } from "passport-go
 import { envVars } from "./env";
 import { Rider } from "../modules/rider/rider.model";
 import { IRider } from "../modules/rider/rider.interface";
-import mongoose from "mongoose";
+import mongoose, { CallbackError } from "mongoose";
+import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcryptjs";
+import { User } from "../modules/user/user.model";
 
 //custom login
+passport.use(new LocalStrategy({ usernameField: "email" },
+  async (email, password, done) => {
+    try {
+      const user = await User.findOne({ email });
+      if (!user) return done(null, false, { message: "User not found" });
+      if (user.googleId)return done(null, false, { message: "This account is registered using Google Login. Please sign in with Google instead of email and password." });
+
+      const isMatch = await bcrypt.compare(password, user.password as string);
+      if (!isMatch) return done(null, false, { message: "Incorrect password" });
+
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  }
+));
+
 
 
 // google login 
@@ -14,24 +34,29 @@ passport.use(new GoogleStrategy({
     clientSecret: envVars.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:5000/api/auth/google/callback"
 },
-    async (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => { // ai j profile type,verifycallback type gulo ache seta janbo kivabe ??(support)
+    async (accessToken: string, refreshToken: string, profile:Profile, done:VerifyCallback) => { 
         try {
             // Check if user already exists
-            let rider = await Rider.findOne({ googleId: profile.id });
+            let user = await User.findOne({ googleId: profile.id });
 
-            if (rider) {
-                return done(null, rider);
+            if (user) {
+                return done(null, user);
             } else {
                 // Create new user
-                rider = new Rider({
+
+                user = await User.create({
                     googleId: profile.id,
                     name: profile.displayName,
-                    email: profile?.emails?.[0]?.value, // ts error e ai theke o solution nah paile koroniyo kii ??(support)
-                    photo: profile.photos?.[0].value
+                    email: profile?.emails?.[0]?.value, 
                 });
 
-                await rider.save();
-                return done(null, rider);
+                await Rider.create({
+                    name: profile.displayName,
+                    email: profile?.emails?.[0]?.value, 
+                });
+
+                // await user.save();
+                return done(null, user);
             }
         } catch (error) {
             return done(error, false);
@@ -40,14 +65,11 @@ passport.use(new GoogleStrategy({
 ));
 
 // User serialization for session
-passport.serializeUser((rider, done) => { // video te aikhane type any use korse akhon ami bujbo kivabe j aikhane type any use korte hobe ?(support)
-  const r = rider as IRider;  
-  console.log(r.googleId);
-  done(null, r);  
+passport.serializeUser((user:any, done) => { 
+  done(null, user._id);  
 });
 
-passport.deserializeUser(async(googleId, done) => {
-    const rider = await Rider.findById({googleId}); // session এ থাকা _id ব্যবহার
-  done(null, rider); // req.user এ attach হবে
-
+passport.deserializeUser(async(id, done) => {
+    const user = await User.findById(id); 
+  done(null, user); 
 });

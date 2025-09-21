@@ -6,8 +6,13 @@
 //     in_transit ,
 //     Completed,
 //     cancel,
+
+import { ObjectId } from "mongoose"
+
+
+
 // }
-enum RideStatus {
+enum RideStatus { // (suppport)
     Requested="Requested",
     Accepted="Accepted",
     picked_up="picked_up",
@@ -17,9 +22,11 @@ enum RideStatus {
 }
 
 export interface IRider {
-    googleId?:string
+    _id?:ObjectId
     name: string
     email: string
+    password:string
+    googleId?:string
     role?: "rider"
     isBlocked?: boolean
 }

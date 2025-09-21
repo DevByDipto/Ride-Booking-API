@@ -40,7 +40,7 @@ const RideSchema = new Schema<IRide>(
     fare: { type: Number, required: true },
 isPaymentCompleted: { type: Boolean, default: false },
   },
-  { timestamps: true } // createdAt, updatedAt auto add হবে
+  { timestamps: true,versionKey: false  } // createdAt, updatedAt auto add হবে
 );
 
 export const Ride = mongoose.model<IRide>("Ride", RideSchema);
