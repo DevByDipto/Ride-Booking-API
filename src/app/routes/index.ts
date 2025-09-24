@@ -17,6 +17,7 @@ const routes= [
     {path:'/user',
         route: userRouter
     },
+   
 ]
 
 routes.forEach((route)=>router.use(route.path,route.route))

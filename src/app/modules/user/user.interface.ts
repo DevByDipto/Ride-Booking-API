@@ -2,7 +2,8 @@ import { ObjectId } from "mongoose"
 
 export enum Role{
     Rider= "Rider",
-    Driver ="Driver"
+    Driver ="Driver",
+    Admin ="Admin"
 }
 
 export interface IUser {

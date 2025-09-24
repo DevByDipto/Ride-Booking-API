@@ -1,5 +1,6 @@
 import { envVars } from "../../config/env";
 import { AppError } from "../../utils/AppError";
+import { Rider } from "../rider/rider.model";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
 import bcrypt from "bcryptjs";
@@ -22,9 +23,15 @@ const createUser = async (payload: Partial<IUser>) => {
     // console.log(payload,"from 2nd payload");
 
     const user = await User.create(payload)
-    console.log(user);
+    // console.log(user);
 
-    return user
+    const rider = await Rider.create({
+        email: user.email,
+        name: user.name,
+    })
+console.log(rider);
+
+    return {user, rider}
 }
 
 export const UserService = {

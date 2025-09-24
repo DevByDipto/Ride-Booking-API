@@ -1,21 +1,38 @@
 import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { UserService } from "./user.service";
+import { User } from "./user.model";
+import { sendResponse } from "../../utils/sendResponse";
 
 
-const createUser =catchAsync( async (req: Request, res: Response, next: NextFunction) => {
-      const data = req.body
-// console.log(data);
-      const result = await UserService.createUser(data)
-      // throw new Error('made by me')
-console.log(result);
-      res.json({
-        message:"success"
-      })
+const createUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const data = req.body
+    // console.log(data);
+    const result = await UserService.createUser(data)
+    // throw new Error('made by me')
+    console.log(result);
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "User Created Successfully",
+        data: result,
+    })
 
 })
 
+const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const users = await User.find()
+    // console.log(users);
+
+   sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Users Retrieved Successfully",
+        data: users,
+    })
+}
+)
 export const userController = {
     createUser,
-   
+    getAllUsers,
 }

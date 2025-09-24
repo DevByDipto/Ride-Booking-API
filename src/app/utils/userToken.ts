@@ -8,7 +8,7 @@ import { jwtHelpers } from "./jwt"
 // }
 // Partial<IUser>
 export const createUserToken = (user:Partial<IUser>)=>{ 
-const payload = { id: user._id, role: user.role }
+const payload = { id: user._id, email: user.email, role: user.role};
 
 const accessToken = jwtHelpers.createToken(payload,envVars.JWT_ACCESS_SECRET,envVars.JWT_ACCESS_EXPIRES )
 

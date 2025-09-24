@@ -6,7 +6,7 @@ export const jwtHelpers = {
     return jwt.sign(payload, secret, { expiresIn } as SignOptions);
   },
 
-  // verifyToken(token: string) {
-  //   return jwt.verify(token, envVars.JWT_SECRET);
-  // },
+  verifyToken(token: string, secret:string) {
+    return jwt.verify(token, secret);
+  },
 };
