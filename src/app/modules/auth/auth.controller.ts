@@ -1,5 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { authService } from "./auth.service";
+import passport from "passport";
+import { createUserToken } from "../../utils/userToken";
+import { setAuthCookie } from "../../utils/cookies";
+import { AppError } from "../../utils/AppError";
+import { catchAsync } from "../../utils/catchAsync";
 
 
 const googleCallBackUrl = (req: Request, res: Response, next: NextFunction) => {
@@ -8,20 +13,40 @@ const googleCallBackUrl = (req: Request, res: Response, next: NextFunction) => {
     res.redirect(redirectTo);
 }
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
-      const data = req.body
-// console.log(data);
 
-      const result = await authService.createUser(data)
 
-      res.json({
-        message:"success"
-      })
+const credentialLogin =(req:Request, res:Response, next:NextFunction) => {
+  passport.authenticate('local', (err: any, user: any, info: any) => {
+    if (err) {
+      return next(new AppError("Authentication error", 500)); // line 30
+    }
+    
+    // if (err) {
+    //   console.log(err);
+      
+    //   return res.status(500).json({ 
+    //     success: false, 
+    //     message: "Authentication error"
+    //   });
+    // }
 
+    if (!user) {
+      return res.status(401).json({ 
+        success: false, 
+        message: info ? info.message : 'Login failed' 
+      });
+    }
+    // console.log("it's work");
+    
+    
+    // throw new Error("made by me") // line 40
+    const userTokens = createUserToken(user);
+    setAuthCookie(res, userTokens);
+    res.json({})
+  })(req, res, next);
 }
-
 
 export const authController = {
     googleCallBackUrl,
-    createUser,
+    credentialLogin,
 }

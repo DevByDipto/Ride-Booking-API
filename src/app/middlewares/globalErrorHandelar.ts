@@ -8,18 +8,24 @@ export const globalErrorHandler = (err: any, req: Request, res: Response, next: 
 
     let statusCode = 500
     let message = "Something Went Wrong!!"
+console.dir(err);
 
-   if (err instanceof AppError) { // instanceof kii ?
+   if (err instanceof AppError) { 
         statusCode = err.statusCode
         message = err.message
+        console.log(message);        
     } else if (err instanceof Error) {
         statusCode = 500;
         message = err.message
     }
+    // else if (err.name === "ZodError") {
+    //     statusCode = 400;
+    //     message = err.errors.map((e: { message: string }) => e.message).join(", ")
+    // }
 
     res.status(statusCode).json({
         success: false,
-        message,
+        messageeeee:message,
         err,
         stack: envVars.NODE_ENV === "development" ? err.stack : null
     })

@@ -2,8 +2,12 @@ import { envVars } from "../config/env"
 import { IUser } from "../modules/user/user.interface"
 import { jwtHelpers } from "./jwt"
 
-
-export const createUserToken = (user:Partial<IUser>)=>{
+// interface TokenPayload{
+//     _id:string,
+//     role:string
+// }
+// Partial<IUser>
+export const createUserToken = (user:Partial<IUser>)=>{ 
 const payload = { id: user._id, role: user.role }
 
 const accessToken = jwtHelpers.createToken(payload,envVars.JWT_ACCESS_SECRET,envVars.JWT_ACCESS_EXPIRES )
