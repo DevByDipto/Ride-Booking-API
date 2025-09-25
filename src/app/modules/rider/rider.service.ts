@@ -25,8 +25,22 @@ const getRiderById = async(id:string)=>{
     return rider
 }
 
+const updateRiderById = async(id:string,data:Partial<IRider>)=>{
+    // console.log(`Rider id from service ${id}`);
+    
+    const rider = await Rider.findOneAndUpdate(
+         { _id:id },          
+    { $set: data },   
+    { new: true }  
+    )
+    // console.log("  Rider by id service",rider);
+    
+    return rider
+}
+
 export const riderService = {
     creatRider,
     getAllRiders,
-    getRiderById
+    getRiderById,
+    updateRiderById
 }

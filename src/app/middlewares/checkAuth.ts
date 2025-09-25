@@ -6,8 +6,9 @@ import { jwtHelpers } from "../utils/jwt";
 import { User } from "../modules/user/user.model";
 import { Rider } from "../modules/rider/rider.model";
 import { Driver } from "../modules/driver/driver.model";
+import { Role } from "../modules/user/user.interface";
 
-export const checkAuth = (role: any) => async (req: Request, res: Response, next: NextFunction) => {
+export const checkAuth = (role:Role) => async (req: Request, res: Response, next: NextFunction) => {
     try {
         const accessToken = req.headers.authorization
 
@@ -23,6 +24,7 @@ export const checkAuth = (role: any) => async (req: Request, res: Response, next
         if (!user) {
             throw new AppError("User does not exist", 400)
         }
+console.log(user.role, role);
 
         if(role !== user.role){
             throw new AppError("You are not authorized to access this route", 403)
