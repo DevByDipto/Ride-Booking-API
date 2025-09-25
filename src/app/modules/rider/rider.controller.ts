@@ -30,6 +30,7 @@ const getAllRiders = async (req: Request, res: Response, next: NextFunction) => 
 const getRiderById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
     const rider =await riderService.getRiderById( id )
+    console.log(" Rider by id controller",rider);
     
    sendResponse(res, {
         statusCode: 200,

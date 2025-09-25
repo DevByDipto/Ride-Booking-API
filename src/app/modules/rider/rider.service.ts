@@ -1,3 +1,4 @@
+import { log } from "console"
 import { IRider } from "./rider.interface"
 import { Rider } from "./rider.model"
 
@@ -16,8 +17,10 @@ const getAllRiders = async(filters:any)=>{
 }
 
 const getRiderById = async(id:string)=>{
+    console.log(`Rider id from service ${id}`);
+    
     const rider = await Rider.findById(id)
-    // console.log(rider);
+    console.log("  Rider by id service",rider);
     
     return rider
 }

@@ -29,7 +29,7 @@ const createUser = async (payload: Partial<IUser>) => {
         email: user.email,
         name: user.name,
     })
-console.log(rider);
+// console.log(rider);
 
     return {user, rider}
 }

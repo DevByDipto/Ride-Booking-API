@@ -18,7 +18,7 @@ export const checkAuth = (role: any) => async (req: Request, res: Response, next
         const verifiedToken = jwtHelpers.verifyToken(accessToken, envVars.JWT_ACCESS_SECRET) as JwtPayload
         
         const user = await User.findOne({ email: verifiedToken.email })
-        console.log(user);
+        // console.log(user);
 
         if (!user) {
             throw new AppError("User does not exist", 400)
