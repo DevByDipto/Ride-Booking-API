@@ -13,7 +13,7 @@ console.dir(err);
    if (err instanceof AppError) { 
         statusCode = err.statusCode
         message = err.message
-        console.log(message);        
+        // console.log(message);        
     } else if (err instanceof Error) {
         statusCode = 500;
         message = err.message

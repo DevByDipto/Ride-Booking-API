@@ -2,10 +2,7 @@ import { log } from "console"
 import { IRider } from "./rider.interface"
 import { Rider } from "./rider.model"
 
-const creatRider = (paylod:Partial<IRider>)=>{
-    // console.log(req.body);
-return paylod
-}
+
 
 const getAllRiders = async(filters:any)=>{
    if(filters.isBlocked){
@@ -17,10 +14,10 @@ const getAllRiders = async(filters:any)=>{
 }
 
 const getRiderById = async(id:string)=>{
-    console.log(`Rider id from service ${id}`);
+    // console.log(`Rider id from service ${id}`);
     
     const rider = await Rider.findById(id)
-    console.log("  Rider by id service",rider);
+    // console.log("  Rider by id service",rider);
     
     return rider
 }
@@ -39,7 +36,6 @@ const updateRiderById = async(id:string,data:Partial<IRider>)=>{
 }
 
 export const riderService = {
-    creatRider,
     getAllRiders,
     getRiderById,
     updateRiderById

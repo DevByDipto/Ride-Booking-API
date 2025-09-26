@@ -40,7 +40,7 @@ const credentialLogin =(req:Request, res:Response, next:NextFunction) => {
     
     
     // throw new Error("made by me") // line 40
-    console.log(user);
+    // console.log(user);
     
     
     

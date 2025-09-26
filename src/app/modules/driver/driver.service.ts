@@ -1,0 +1,87 @@
+
+import { log } from "console"
+import { IDriver } from "./driver.interface"
+import { User } from "../user/user.model"
+import { Driver } from "./driver.model"
+import { Rider } from "../rider/rider.model"
+import { IRider } from "../rider/rider.interface"
+import { AppError } from "../../utils/AppError"
+
+const creatDriver = async (payload: IDriver) => {
+
+    const isUserExist = await User.findOne({ email: payload.email })
+
+    if (!isUserExist) {
+        // console.log(isUserExist);
+        throw new AppError("You are not a valid user", 401)
+    }
+
+    // 1. নতুন Driver তৈরি
+    const driver = await Driver.create(payload);
+
+    // 2. User role update → "driver"
+    await User.findOneAndUpdate(
+        { email: payload.email },
+        { $set: { role: "driver", driverId: driver._id } },
+        { new: true }
+    );
+    // 3. delete riderId from user
+    await User.updateOne(
+        { email: payload.email },
+        { $unset: { riderId: "" } }
+    );
+
+    // 4. Rider model থেকে delete
+    await Rider.findOneAndDelete({ email: payload.email });
+    return driver
+}
+
+const getAllDrivers = async (filters: any) => {
+    if (filters.isApproved) {
+        const drivers = await Driver.find({ isApproved: filters.isApproved })
+        return drivers
+    }
+    const drivers = await Driver.find()
+    return drivers
+}
+
+const getDriverById = async (id: string) => {
+    // console.log(`Rider id from service ${id}`);
+
+    const driver = await Driver.findById(id)
+    // console.log("driver by id service", driver);
+
+    return driver
+}
+
+const updateDriverStatusByAdmin = async (id: string, data: Partial<IRider>) => {
+    // console.log(`Rider id from service ${id}`);
+
+    const driver = await Driver.findOneAndUpdate(
+        { _id: id },
+        { $set: data },
+        { new: true }
+    )
+    // console.log("  Rider by id service",rider);
+
+    return driver
+}
+const updateDriverAvailability = async (id: string, data: Partial<IRider>) => {
+    // console.log(`Rider id from service ${id}`);
+    const driver = await Driver.findOneAndUpdate(
+        { _id: id },
+        { $set: data },
+        { new: true }
+    )
+    // console.log("  Rider by id service",rider);
+
+    return driver
+}
+
+export const driverService = {
+    creatDriver,
+    getAllDrivers,
+    getDriverById,
+    updateDriverStatusByAdmin,
+    updateDriverAvailability
+}

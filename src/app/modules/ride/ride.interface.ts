@@ -1,13 +1,14 @@
 import { Types } from "mongoose";
+import { Role } from "../user/user.interface";
 
 export enum RideStatus {
-  Requested = "Requested",
-  Accepted = "Accepted",
-  PickedUp = "Picked-up",
-  InTransit = "Intransited",
-  Completed = "Completed",
-  Cancelled = "Cancelled",
-  NoResponse= "NoResponse"
+  Requested = "requested", //(support) value capital letter diye shuru hobe naki small letter diye  ??
+  Accepted = "accepted",
+  PickedUp = "picked-up",
+  InTransit = "intransited",
+  Completed = "completed",
+  Cancelled = "cancelled",
+  NoResponse = "noResponse"
 }
 
 export interface ILocation {
@@ -32,7 +33,7 @@ export interface IRide {
   destinationLocation: ILocation;
   status: RideStatus;
   timestamps: IRideTimestamps;
-
-  fare: number;                  
-  isPaymentCompleted?: boolean;   
+  updatedBy?: Role;
+  fare: number;
+  isPaymentCompleted?: boolean;
 }

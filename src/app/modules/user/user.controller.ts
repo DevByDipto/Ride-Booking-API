@@ -10,7 +10,7 @@ const createUser = catchAsync(async (req: Request, res: Response, next: NextFunc
     // console.log(data);
     const result = await UserService.createUser(data)
     // throw new Error('made by me')
-    console.log(result);
+    // console.log(result);
     sendResponse(res, {
         statusCode: 200,
         success: true,

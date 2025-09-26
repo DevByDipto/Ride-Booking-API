@@ -18,18 +18,15 @@ const createUser = async (payload: Partial<IUser>) => {
     const salt = bcrypt.genSaltSync(Number(envVars.SALT));
     const haspassword = bcrypt.hashSync(payload.password as string, salt)
     payload.password = haspassword
-    // console.log(haspassword);
-
-    // console.log(payload,"from 2nd payload");
-
-    const user = await User.create(payload)
-    // console.log(user);
-
+    
+// create new rider
     const rider = await Rider.create({
-        email: user.email,
-        name: user.name,
+        email: payload.email,
+        name: payload.name,
     })
-// console.log(rider);
+// create new user
+    const user = await User.create({...payload,riderId:rider._id})
+   
 
     return {user, rider}
 }

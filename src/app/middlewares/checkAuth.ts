@@ -8,7 +8,7 @@ import { Rider } from "../modules/rider/rider.model";
 import { Driver } from "../modules/driver/driver.model";
 import { Role } from "../modules/user/user.interface";
 
-export const checkAuth = (role:Role) => async (req: Request, res: Response, next: NextFunction) => {
+export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Response, next: NextFunction) => {
     try {
         const accessToken = req.headers.authorization
 
@@ -17,20 +17,20 @@ export const checkAuth = (role:Role) => async (req: Request, res: Response, next
         }
 
         const verifiedToken = jwtHelpers.verifyToken(accessToken, envVars.JWT_ACCESS_SECRET) as JwtPayload
-        
+
         const user = await User.findOne({ email: verifiedToken.email })
         // console.log(user);
 
         if (!user) {
             throw new AppError("User does not exist", 400)
         }
-console.log(user.role, role);
+        // console.log(user.role, role);
 
-        if(role !== user.role){
+        if (!authRole.includes(verifiedToken.role)) {
             throw new AppError("You are not authorized to access this route", 403)
         }
 
-        if (user.role == "Rider") {
+        if (user.role == "rider") {
             const rider = await Rider.findOne({ email: verifiedToken.email })
             if (!rider) {
                 throw new AppError("You are not a valid rider", 403)
@@ -40,7 +40,7 @@ console.log(user.role, role);
             }
         }
 
-        if (user.role == "Driver") {
+        if (user.role == "driver") {
             const driver = await Driver.findOne({ email: verifiedToken.email })
             if (!driver) {
                 throw new AppError("You are not a valid rider", 403)

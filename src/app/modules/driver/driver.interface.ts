@@ -6,7 +6,7 @@ export enum Vehicle {
 
 export enum IsApproved{
 pending="pending",
-aproved="aproved",
+aproved="approved",
 suspend="suspend",
 }
 
@@ -15,6 +15,6 @@ export interface IDriver {
     email: string
     role?: "driver"
     vehicleInfo:Vehicle
-    Availability:boolean
+    availability:boolean
     isApproved?:IsApproved
 }

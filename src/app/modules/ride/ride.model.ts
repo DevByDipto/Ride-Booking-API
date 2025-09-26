@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { RideStatus, IRide } from "./ride.interface"; 
+import { Role } from "../user/user.interface";
 
 const LocationSchema = new Schema(
   {
@@ -34,6 +35,10 @@ const RideSchema = new Schema<IRide>(
       type: String,
       enum: Object.values(RideStatus), 
       default: RideStatus.Requested,
+    },
+    updatedBy: {
+      type: String,
+      enum: Object.values(Role), 
     },
 
     timestamps: { type: RideTimestampsSchema, default: {} },

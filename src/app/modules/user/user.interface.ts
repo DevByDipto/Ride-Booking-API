@@ -1,16 +1,18 @@
 import { ObjectId } from "mongoose"
 
 export enum Role{
-    Rider= "Rider",
-    Driver ="Driver",
-    Admin ="Admin"
+    Rider= "rider",
+    Driver ="driver",
+    Admin ="admin"
 }
 
 export interface IUser {
     _id?:ObjectId
+    riderId:ObjectId
+    driverId:ObjectId
+    googleId?:string
     name: string
     email: string
     password?:string
-    googleId?:string
     role?: Role
 }

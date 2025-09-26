@@ -5,20 +5,11 @@ import { sendResponse } from "../../utils/sendResponse";
 import { send } from "process";
 
 
-const creatRider = (req: Request, res: Response, next: NextFunction) => {
-    const data = req.body
-    const rider = riderService.creatRider(data)
-    sendResponse(res, {
-        statusCode: 200,
-        success: true,
-        message: "Rider Created Successfully",
-        data: rider,
-    })
-}
+
 
 const getAllRiders = async (req: Request, res: Response, next: NextFunction) => {
-    const params = req.query
-    const riders = await riderService.getAllRiders(params)
+    const filters = req.query
+    const riders = await riderService.getAllRiders(filters)
     sendResponse(res, { 
         statusCode: 200,
         success: true, 
@@ -30,7 +21,7 @@ const getAllRiders = async (req: Request, res: Response, next: NextFunction) => 
 const getRiderById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
     const rider =await riderService.getRiderById( id )
-    console.log(" Rider by id controller",rider);
+    // console.log(" Rider by id controller",rider);
     
    sendResponse(res, {
         statusCode: 200,
@@ -53,7 +44,6 @@ const updateRiderById = async(req: Request, res: Response, next: NextFunction) =
     })
 }
 export const riderControler = {
-    creatRider,
     getAllRiders,
     getRiderById,
     updateRiderById

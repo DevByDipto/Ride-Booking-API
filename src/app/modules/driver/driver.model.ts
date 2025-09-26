@@ -7,7 +7,7 @@ const driverschema = new Schema<IDriver>({
     email: { type: String, required: true },
     role: { type: String, enum: ['driver'], default: 'driver' },
     vehicleInfo: { type:String, enum: Object.values(Vehicle), required: true },
-    Availability: { type: Boolean, required: true },
+    availability: { type: Boolean, required: true },
     isApproved: { type: String, enum: Object.values(IsApproved), default: IsApproved.pending },
 },
 { timestamps: true,versionKey: false  }
