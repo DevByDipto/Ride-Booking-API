@@ -14,8 +14,8 @@ const userSchema = new Schema<IUser>({
   },
   googleId:{type:String},
     name:{type:String,required:true},
-    email:{type:String,required:true},
-    password:{type:String},
+    email:{type:String,required:true,unique:true},
+    password:{type:String,minlength:6},
     role:{type:String,enum:Object.values(Role),default:'rider'},
 },
 { timestamps: true,versionKey: false }

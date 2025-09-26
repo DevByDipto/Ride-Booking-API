@@ -4,9 +4,10 @@ import { IRider } from "./rider.interface";
 
 const riderSchema = new Schema<IRider>({
     name:{type:String,require:true},
-    email:{type:String,require:true},
+    email:{type:String,require:true,unique:true},
     role:{type:String,enum:['rider'],default:'rider'},
-    isBlocked:{type:Boolean}
+    isBlocked:{type:Boolean},
+    age:{type:Number,min:18,max:65},
 },
 { timestamps: true,versionKey: false}
 )

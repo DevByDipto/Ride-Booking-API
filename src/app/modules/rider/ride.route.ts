@@ -10,6 +10,8 @@ const router = Router()
 
 router.get('/',checkAuth(Role.Admin),riderControler.getAllRiders)
 router.get('/:id',checkAuth(Role.Rider),riderControler.getRiderById)
-router.patch('/:id',checkAuth(Role.Admin),validationRequest(riderBlockStatusZodSchema),riderControler.updateRiderById)
+router.patch('/:id',checkAuth(Role.Admin),
+// validationRequest(riderBlockStatusZodSchema),
+riderControler.updateRiderById)
 
 export const riderRouter = router

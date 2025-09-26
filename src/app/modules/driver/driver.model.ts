@@ -4,7 +4,7 @@ import { IDriver, IsApproved, Vehicle } from "./driver.interface";
 
 const driverschema = new Schema<IDriver>({
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true,unique:true },
     role: { type: String, enum: ['driver'], default: 'driver' },
     vehicleInfo: { type:String, enum: Object.values(Vehicle), required: true },
     availability: { type: Boolean, required: true },
