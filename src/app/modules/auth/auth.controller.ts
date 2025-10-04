@@ -5,6 +5,7 @@ import { createUserToken } from "../../utils/userToken";
 import { setAuthCookie } from "../../utils/cookies";
 import { AppError } from "../../utils/AppError";
 import { catchAsync } from "../../utils/catchAsync";
+import { sendResponse } from "../../utils/sendResponse";
 
 
 const googleCallBackUrl = (req: Request, res: Response, next: NextFunction) => {
@@ -55,7 +56,29 @@ const credentialLogin =(req:Request, res:Response, next:NextFunction) => {
   })(req, res, next);
 }
 
+const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
+
+   res.clearCookie('accessToken', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+  })
+
+  res.clearCookie('refreshToken', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+  })
+ 
+   sendResponse(res, {
+        success: true,
+        statusCode: 200,
+        message: "User Logged Out Successfully",
+        data: null,
+    })
+})
 export const authController = {
     googleCallBackUrl,
     credentialLogin,
+    logout
 }

@@ -29,5 +29,7 @@ router.get('/google/callback',
 // Login route with custom callback
 router.post('/login', authController.credentialLogin);
 
+router.post('/logout', authController.logout);
+
 
 export const authRouter = router
