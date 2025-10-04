@@ -6,6 +6,7 @@ import { setAuthCookie } from "../../utils/cookies";
 import { AppError } from "../../utils/AppError";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
+import { set } from "mongoose";
 
 
 const googleCallBackUrl = (req: Request, res: Response, next: NextFunction) => {
@@ -56,6 +57,31 @@ const credentialLogin =(req:Request, res:Response, next:NextFunction) => {
   })(req, res, next);
 }
 
+const getNewAccessToken = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
+  const refreshToken=  req.headers.authorization;
+  // console.log(refreshToken);
+   
+   // console.log(refreshToken);
+   
+   if(!refreshToken){
+    return next(new AppError("No refresh token found", 401))
+   }
+   
+    const tokenInfo = await authService.getNewAccessToken(refreshToken)
+
+    setAuthCookie(res, tokenInfo)
+
+return sendResponse(res, {
+        success: true,
+        statusCode: 200,
+        message: "New access token generated successfully",
+        data: tokenInfo,
+    })
+  })
+  // await authService.getNewAccessToken(refreshToken)
+
+
+
 const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
 
    res.clearCookie('accessToken', {
@@ -77,8 +103,9 @@ const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) =>
         data: null,
     })
 })
-export const authController = {
+export const AuthControllers = {
     googleCallBackUrl,
     credentialLogin,
+    getNewAccessToken,
     logout
 }

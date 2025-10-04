@@ -1,6 +1,6 @@
 import { Router } from "express"
 import passport from "passport"
-import { authController } from "./auth.controller";
+import { AuthControllers } from "./auth.controller";
 import { jwtHelpers } from "../../utils/jwt";
 import { setAuthCookie } from "../../utils/cookies";
 import { createUserToken } from "../../utils/userToken";
@@ -21,15 +21,15 @@ router.get('/google-login', (req, res, next) => {
 
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
- authController.googleCallBackUrl
+ AuthControllers.googleCallBackUrl
 );
 
 
 
 // Login route with custom callback
-router.post('/login', authController.credentialLogin);
-
-router.post('/logout', authController.logout);
+router.post('/login', AuthControllers.credentialLogin);
+router.post("/refresh-token", AuthControllers.getNewAccessToken)
+router.post('/logout', AuthControllers.logout);
 
 
 export const authRouter = router

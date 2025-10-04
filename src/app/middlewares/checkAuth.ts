@@ -30,7 +30,7 @@ export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Resp
             throw new AppError("You are not authorized to access this route", 403)
         }
 
-        if (user.role == "rider") {
+        if (user.role == Role.Rider) {
             const rider = await Rider.findOne({ email: verifiedToken.email })
             if (!rider) {
                 throw new AppError("You are not a valid rider", 403)
@@ -40,7 +40,7 @@ export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Resp
             }
         }
 
-        if (user.role == "driver") {
+        if (user.role == Role.Driver) {
             const driver = await Driver.findOne({ email: verifiedToken.email })
             if (!driver) {
                 throw new AppError("You are not a valid rider", 403)
