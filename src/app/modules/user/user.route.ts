@@ -10,7 +10,7 @@ import { Role } from "./user.interface"
 const router = Router()
 
 router.post("/register",
-    // validationRequest(UserZodSchema),
+    validationRequest(UserZodSchema),
      userController.createUser)
 router.get("/",checkAuth(Role.Admin),userController.getAllUsers)
 

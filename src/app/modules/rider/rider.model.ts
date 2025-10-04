@@ -7,7 +7,6 @@ const riderSchema = new Schema<IRider>({
     email:{type:String,require:true,unique:true},
     role:{type:String,enum:['rider'],default:'rider'},
     isBlocked:{type:Boolean},
-    age:{type:Number,min:18,max:65},
 },
 { timestamps: true,versionKey: false}
 )

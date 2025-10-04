@@ -29,6 +29,7 @@ export const globalErrorHandler = (err: any, req: Request, res: Response, next: 
         const simplifiedError = handleCastError(err)
         statusCode = simplifiedError.statusCode;
         message = simplifiedError.message
+        errorSources = simplifiedError.errorSources as TErrorSources[]
     }
     else if (err.name === "ZodError") {
         const simplifiedError = handlerZodError(err)
@@ -55,7 +56,7 @@ export const globalErrorHandler = (err: any, req: Request, res: Response, next: 
         success: false,
         message,
         errorSources,
-        err: envVars.NODE_ENV === "development" ? err : null,
+        err:envVars.NODE_ENV === "development" ? err : null,
         stack: envVars.NODE_ENV === "development" ? err.stack : null
     })
 }

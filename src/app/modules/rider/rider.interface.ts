@@ -29,5 +29,4 @@ export interface IRider {
     googleId?:string
     role?: "rider"
     isBlocked?: boolean,
-    age?:number
 }
