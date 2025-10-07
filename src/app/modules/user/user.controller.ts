@@ -32,7 +32,24 @@ const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFun
     })
 }
 )
+
+const getMe =  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const token = req?.cookies?.accessToken || req?.headers?.authorization
+    // console.log(token);
+    
+    const result = await UserService.getMe(token)
+
+    sendResponse(res,{
+        statusCode:200,
+        success: true,
+        message: "Users Retrieved Successfully",
+        data: result,
+    })
+})
+
+
 export const userController = {
     createUser,
     getAllUsers,
+    getMe,
 }

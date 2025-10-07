@@ -10,13 +10,17 @@ import { Role } from "../modules/user/user.interface";
 
 export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const accessToken = req.headers.authorization
+
+        const accessToken = req?.cookies?.accessToken || req?.headers?.authorization
+// console.log("accessToken",accessToken);
+// console.log("req?.cookies",req.cookies);
 
         if (!accessToken) {
             throw new AppError("No Token Recieved", 403)
         }
 
         const verifiedToken = jwtHelpers.verifyToken(accessToken, envVars.JWT_ACCESS_SECRET) as JwtPayload
+// console.log("verifiedToken",verifiedToken);
 
         const user = await User.findOne({ email: verifiedToken.email })
         // console.log(user);

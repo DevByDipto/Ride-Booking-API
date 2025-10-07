@@ -8,12 +8,16 @@ import { envVars } from "./app/config/env"
 import passport from "passport"
 import './app/config/passport'
 import { authRouter } from "./app/modules/auth/auth.route"
-
+import cookieParser from "cookie-parser"
 
 export const app = express()
 
+app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:5173", // ✅ নির্দিষ্ট করে দাও
+    credentials: true, // ✅ cookies/token allow করার জন্য
+  }))
 
 
 app.use(session({
