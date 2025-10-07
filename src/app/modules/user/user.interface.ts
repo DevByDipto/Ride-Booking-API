@@ -8,7 +8,7 @@ export enum Role{
 
 export interface IUser {
     _id?:ObjectId
-    riderId:ObjectId
+    rider:ObjectId
     driverId:ObjectId
     googleId?:string
     name: string

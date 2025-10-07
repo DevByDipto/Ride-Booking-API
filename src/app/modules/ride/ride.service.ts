@@ -9,7 +9,7 @@ import { th } from "zod/v4/locales"
 const createRide = async (payload: IRide) => {
     // console.log(payload,"reom paylod");
 
-    const isRiderExist = await Rider.findOne({ _id: payload.riderId })
+    const isRiderExist = await Rider.findOne({ _id: payload.rider })
 
     if (!isRiderExist) {
         throw new AppError("You are not a valid rider", 500)
@@ -34,7 +34,7 @@ const getAllRides = async (filters: any) => {
         return rides
     }
     if (filters.riderId) {
-        const rides = await Ride.find({ riderId: filters.riderId })
+        const rides = await Ride.find({ rider: filters.riderId })
         return rides
     }
     const rides = await Ride.find()
@@ -52,7 +52,7 @@ const getRideById = async (id: string) => {
 
 const updateRideById = async (id: string, data: Partial<IRide>) => {
 
-    if(!data.driverId && !data.riderId){
+    if(!data.driverId && !data.rider){
         throw new AppError("You must provide driverId or riderId to update the ride", 400)
     }
     

@@ -27,7 +27,7 @@ const createUser = async (payload: Partial<IUser>) => {
         name: payload.name,
     })
 // create new user
-    const user = await User.create({...payload,riderId:rider._id})
+    const user = await User.create({...payload,rider:rider._id})
    
 
     return {user, rider}
@@ -42,7 +42,7 @@ if (!token) {
 const verifiedToken = jwtHelpers.verifyToken(token,envVars.JWT_ACCESS_SECRET) as JwtPayload
 console.log(verifiedToken);
 
-const user = await User.findOne({_id: verifiedToken.id})
+const user = await User.findOne({_id: verifiedToken.id}).populate("rider")
 if(!user){
     return new AppError("User not found or account no longer exists", 404)
 }

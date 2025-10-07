@@ -25,7 +25,7 @@ const RideTimestampsSchema = new Schema(
 
 const RideSchema = new Schema<IRide>(
   {
-    riderId: { type: Schema.Types.ObjectId, ref: "Rider", required: true },
+    rider: { type: Schema.Types.ObjectId, ref: "Rider", required: true },
     driverId: { type: Schema.Types.ObjectId, ref: "Driver" },
 
     pickupLocation: { type: LocationSchema, required: true },

@@ -3,7 +3,7 @@ import { IUser, Role } from "./user.interface"
 import { Schema } from "mongoose"
 
 const userSchema = new Schema<IUser>({
-     riderId: {
+     rider: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Rider", 
     required: true,

@@ -25,10 +25,10 @@ const creatDriver = async (payload: IDriver) => {
         { $set: { role: "driver", driverId: driver._id } },
         { new: true }
     );
-    // 3. delete riderId from user
+    // 3. delete rider from user
     await User.updateOne(
         { email: payload.email },
-        { $unset: { riderId: "" } }
+        { $unset: { rider: "" } }
     );
 
     // 4. Rider model থেকে delete

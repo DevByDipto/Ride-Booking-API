@@ -27,7 +27,7 @@ export interface IRideTimestamps {
 }
 
 export interface IRide {
-  riderId: Types.ObjectId;
+  rider: Types.ObjectId;
   driverId?: Types.ObjectId;
   pickupLocation: ILocation;
   destinationLocation: ILocation;
