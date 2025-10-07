@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, response, Response } from "express";
 import { authService } from "./auth.service";
 import passport from "passport";
 import { createUserToken } from "../../utils/userToken";
@@ -7,6 +7,7 @@ import { AppError } from "../../utils/AppError";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { set } from "mongoose";
+import { success } from "zod";
 
 
 const googleCallBackUrl = (req: Request, res: Response, next: NextFunction) => {
@@ -48,10 +49,11 @@ const credentialLogin =(req:Request, res:Response, next:NextFunction) => {
     
     const userTokens = createUserToken(user);
     setAuthCookie(res, userTokens);
+  
     res.json({
       success: true,
       message: "Login successful",
-      user,
+      data:user,
       tokens: userTokens
     });
   })(req, res, next);

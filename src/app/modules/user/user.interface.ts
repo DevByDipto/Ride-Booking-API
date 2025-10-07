@@ -9,7 +9,7 @@ export enum Role{
 export interface IUser {
     _id?:ObjectId
     rider:ObjectId
-    driverId:ObjectId
+    driver:ObjectId
     googleId?:string
     name: string
     email: string

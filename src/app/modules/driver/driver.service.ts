@@ -22,7 +22,7 @@ const creatDriver = async (payload: IDriver) => {
     // 2. User role update → "driver"
     await User.findOneAndUpdate(
         { email: payload.email },
-        { $set: { role: "driver", driverId: driver._id } },
+        { $set: { role: "driver", driver: driver._id } },
         { new: true }
     );
     // 3. delete rider from user

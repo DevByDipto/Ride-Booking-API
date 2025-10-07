@@ -30,7 +30,7 @@ const getAllRides = async (filters: any) => {
         return rides
     }
     if (filters.driverId) {
-        const rides = await Ride.find({ driverId: filters.driverId })
+        const rides = await Ride.find({ driver: filters.driverId })
         return rides
     }
     if (filters.riderId) {
@@ -52,7 +52,7 @@ const getRideById = async (id: string) => {
 
 const updateRideById = async (id: string, data: Partial<IRide>) => {
 
-    if(!data.driverId && !data.rider){
+    if(!data.driver && !data.rider){
         throw new AppError("You must provide driverId or riderId to update the ride", 400)
     }
     

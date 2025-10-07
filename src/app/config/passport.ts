@@ -12,7 +12,7 @@ import { User } from "../modules/user/user.model";
 passport.use(new LocalStrategy({ usernameField: "email" },
   async (email, password, done) => {
     try {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).populate('rider').populate("driver");
       if (!user) return done(null, false, { message: "User not found" });
       if (user.googleId) return done(null, false, { message: "This account is registered using Google Login. Please sign in with Google instead of email and password." });
 

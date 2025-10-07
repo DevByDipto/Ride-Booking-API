@@ -8,7 +8,7 @@ const userSchema = new Schema<IUser>({
     ref: "Rider", 
     required: true,
   },
-     driverId: {
+     driver: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Drtiver", 
   },
