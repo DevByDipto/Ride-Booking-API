@@ -1,6 +1,11 @@
 import { Types } from "mongoose";
 import { Role } from "../user/user.interface";
 
+export interface IRideQuery{
+    riderId?:string,
+    driverId?:string,
+}
+
 export enum RideStatus {
   Requested = "requested", //(support) value capital letter diye shuru hobe naki small letter diye  ??
   Accepted = "accepted",

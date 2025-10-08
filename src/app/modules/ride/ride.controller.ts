@@ -29,6 +29,8 @@ const getAllRides = async (req: Request, res: Response, next: NextFunction) => {
 
 const getRideById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
+    console.log(id);
+    
     const ride =await rideService.getRideById(id)
     // console.log(" ride by id controller",ride);
     
@@ -39,6 +41,21 @@ const getRideById = async(req: Request, res: Response, next: NextFunction) => {
         data: ride,
     })
 }
+
+// const getRideByDriverAndRiderId = async(req: Request, res: Response, next: NextFunction) => {
+//     const query = req.query
+//     console.log(query);
+    
+//     const ride =await rideService.getRideByDriverAndRiderId(query)
+//     // console.log(" ride by id controller",ride);
+    
+//    sendResponse(res, {
+//         statusCode: 200,
+//         success: true,  
+//         message: "ride Retrieved Successfully",
+//         data: ride,
+//     })
+// }
 
 const updateRideById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
@@ -56,5 +73,6 @@ export const rideController = {
     createRide,
     getAllRides,
     getRideById,
+    // getRideByDriverAndRiderId,
     updateRideById
 }

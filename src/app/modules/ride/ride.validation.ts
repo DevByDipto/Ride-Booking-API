@@ -32,7 +32,7 @@ const rideTimestampsSchema = z.object({
 
 // Ride Schema
 export const rideZodSchema = z.object({
-  riderId: objectIdSchema,
+  rider: objectIdSchema,
 //   driverId: z
 //     .string()
 //     .refine((val) => Types.ObjectId.isValid(val), {
@@ -54,8 +54,8 @@ export const rideZodSchema = z.object({
 
 // update ride schema
 export const updateRideZodSchema = z.object({
-  driverId: objectIdSchema.optional(),  
-  riderId: objectIdSchema.optional(),
+  driver: objectIdSchema.optional(),  
+  rider: objectIdSchema.optional(),
   status: z.nativeEnum(RideStatus),
   updatedBy:z.nativeEnum(Role),
   timestamps: rideTimestampsSchema

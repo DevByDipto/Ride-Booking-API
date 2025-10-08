@@ -1,9 +1,10 @@
 import { log } from "console"
 import { Ride } from "./ride.model"
-import { IRide } from "./ride.interface"
+import { IRide, IRideQuery } from "./ride.interface"
 import { Rider } from "../rider/rider.model"
 import { AppError } from "../../utils/AppError"
 import { th } from "zod/v4/locales"
+import mongoose from "mongoose"
 
 
 const createRide = async (payload: IRide) => {
@@ -24,17 +25,15 @@ const createRide = async (payload: IRide) => {
     return ride
 }
 
-const getAllRides = async (filters: any) => {
-    if (filters.status) {
-        const rides = await Ride.find({ isBlocked: filters.isBlocked })
-        return rides
-    }
+const getAllRides = async (filters: IRideQuery) => {
+    
     if (filters.driverId) {
-        const rides = await Ride.find({ driver: filters.driverId })
+        const rides = await Ride.find({ driver: new mongoose.Types.ObjectId(filters.driverId)})
         return rides
     }
+
     if (filters.riderId) {
-        const rides = await Ride.find({ rider: filters.riderId })
+        const rides = await Ride.find({ rider: new mongoose.Types.ObjectId(filters.riderId)}) 
         return rides
     }
     const rides = await Ride.find()
@@ -43,12 +42,18 @@ const getAllRides = async (filters: any) => {
 
 const getRideById = async (id: string) => {
     // console.log(`Ride id from service ${id}`);
-
     const ride = await Ride.findById(id)
     // console.log("  Ride by id service", Ride);
-
     return ride
 }
+
+// const getRideByDriverAndRiderId = async (query: IRideQuery) => {
+//     // console.log(`Ride id from service ${id}`);
+// console.log(query);
+//     // const ride = await Ride.findById(id)
+//     // console.log("  Ride by id service", Ride);
+//     return "ride"
+// }
 
 const updateRideById = async (id: string, data: Partial<IRide>) => {
 
@@ -73,5 +78,6 @@ export const rideService = {
     createRide,
     getAllRides,
     getRideById,
+    // getRideByDriverAndRiderId,
     updateRideById
 }

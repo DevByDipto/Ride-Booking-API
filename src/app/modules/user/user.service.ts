@@ -40,13 +40,13 @@ if (!token) {
 }
  
 const verifiedToken = jwtHelpers.verifyToken(token,envVars.JWT_ACCESS_SECRET) as JwtPayload
-console.log(verifiedToken);
+// console.log(verifiedToken);
 
 const user = await User.findOne({_id: verifiedToken.id}).populate("rider")
 if(!user){
     return new AppError("User not found or account no longer exists", 404)
 }
-console.log("user",user);
+// console.log("user",user);
 
 return user
 }
