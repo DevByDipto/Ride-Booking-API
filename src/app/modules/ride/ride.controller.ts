@@ -3,6 +3,7 @@ import { router } from "../../routes";
 import { rideService } from "./ride.service";
 import { sendResponse } from "../../utils/sendResponse";
 import { send } from "process";
+import { Ride } from "./ride.model";
 
 
 const createRide =async (req: Request, res: Response, next: NextFunction) => {
@@ -17,13 +18,18 @@ const createRide =async (req: Request, res: Response, next: NextFunction) => {
 }
 
 const getAllRides = async (req: Request, res: Response, next: NextFunction) => {
-    const filters  = req.query
-    const rides = await rideService.getAllRides(filters)
+    const queryParams  = req.query
+   
+     
+    const result = await rideService.getAllRides(queryParams)
+     
+    
     sendResponse(res, { 
         statusCode: 200,
         success: true, 
         message: "rides Retrieved Successfully",       
-        data: rides,
+       ...result,
+    
     })
 }
 

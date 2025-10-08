@@ -4,7 +4,8 @@ import { Response } from "express";
 interface IMeta{
     page?:number;
     limit?:number;
-    total?:number
+    total?:number;
+    totalPages?:number;
 }
 
 interface IResponse<T> {

@@ -1,8 +1,10 @@
 import { Types } from "mongoose";
 import { Role } from "../user/user.interface";
 
-export interface IRideQuery{
-    riderId?:string,
+export interface IRideQueryParams {
+  page?: string;
+  limit?: string;
+   riderId?:string,
     driverId?:string,
 }
 

@@ -1,10 +1,11 @@
 import { log } from "console"
 import { Ride } from "./ride.model"
-import { IRide, IRideQuery } from "./ride.interface"
+import { IRide, IRideQueryParams } from "./ride.interface"
 import { Rider } from "../rider/rider.model"
 import { AppError } from "../../utils/AppError"
 import { th } from "zod/v4/locales"
 import mongoose from "mongoose"
+import { paginate } from "../../utils/paginate"
 
 
 const createRide = async (payload: IRide) => {
@@ -25,20 +26,22 @@ const createRide = async (payload: IRide) => {
     return ride
 }
 
-const getAllRides = async (filters: IRideQuery) => {
-    
-    if (filters.driverId) {
-        const rides = await Ride.find({ driver: new mongoose.Types.ObjectId(filters.driverId)})
-        return rides
-    }
 
-    if (filters.riderId) {
-        const rides = await Ride.find({ rider: new mongoose.Types.ObjectId(filters.riderId)}) 
-        return rides
-    }
-    const rides = await Ride.find()
-    return rides
-}
+
+const getAllRides = async (queryParams:IRideQueryParams) => {
+  const query: any = {};
+
+  if (queryParams.driverId) query.driver = new mongoose.Types.ObjectId(queryParams.driverId);
+  if (queryParams.riderId) query.rider = new mongoose.Types.ObjectId(queryParams.riderId);
+
+  const page = parseInt(queryParams?.page as string) || 1;
+  const limit = parseInt(queryParams?.limit as string) || 10;
+   
+  const result = await paginate(Ride, query, { page, limit });
+
+  return result
+};
+
 
 const getRideById = async (id: string) => {
     // console.log(`Ride id from service ${id}`);
