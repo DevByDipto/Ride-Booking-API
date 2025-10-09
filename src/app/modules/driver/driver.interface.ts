@@ -17,4 +17,5 @@ export interface IDriver {
     vehicleInfo:Vehicle
     availability?:boolean
     isApproved?:IsApproved
+    phoneNumber:string
 }

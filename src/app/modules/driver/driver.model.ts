@@ -9,6 +9,7 @@ const driverschema = new Schema<IDriver>({
     vehicleInfo: { type:String, enum: Object.values(Vehicle), required: true },
     availability: { type: Boolean, default:true },
     isApproved: { type: String, enum: Object.values(IsApproved), default: IsApproved.pending },
+    phoneNumber: { type: String, required:true },
 },
 { timestamps: true,versionKey: false  }
 )

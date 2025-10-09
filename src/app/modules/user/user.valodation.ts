@@ -8,5 +8,10 @@ export const UserZodSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string().min(6),
-
+ phoneNumber: z
+          .string()
+          .refine(
+            (val) => !val || /^\d{11}$/.test(val),
+            "Phone number must be exactly 11 digits if provided"
+          ),
 });

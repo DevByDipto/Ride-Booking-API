@@ -9,10 +9,14 @@ import bcrypt from "bcryptjs";
 import { User } from "../modules/user/user.model";
 
 //custom login
-passport.use(new LocalStrategy({ usernameField: "email" },
-  async (email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: "email",passwordField: "password",passReqToCallback: true },
+  async (req,email, password, done) => {
     try {
-      const user = await User.findOne({ email }).populate('rider').populate("driver");
+      // const { role } = req.body;
+      // const populateField = role
+      
+      const user = await User.findOne({ email })
+
       if (!user) return done(null, false, { message: "User not found" });
       if (user.googleId) return done(null, false, { message: "This account is registered using Google Login. Please sign in with Google instead of email and password." });
 
@@ -21,7 +25,7 @@ passport.use(new LocalStrategy({ usernameField: "email" },
 
       return done(null, user);
     } catch (err) {
-      return done(err);
+      return done(err); 
     }
   }
 ));

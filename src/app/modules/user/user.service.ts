@@ -9,7 +9,7 @@ import bcrypt from "bcryptjs";
 import { Driver } from "../driver/driver.model";
 
 const createUser = async (payload: Partial<IUser>) => {
-    // console.log(payload,"reom paylod");
+    console.log(payload,"reom paylod");
 
     const isUserExist = await User.findOne({ email: payload.email })
     // console.log(isUserExist);
@@ -24,21 +24,14 @@ const createUser = async (payload: Partial<IUser>) => {
     
     if(payload.role === Role.Rider){
 // create new rider
-    const rider = await Rider.create({
-        email: payload.email,
-        name: payload.name,
-    })
+    const rider = await Rider.create(payload)
 // create new user
     const user = await User.create({...payload,rider:rider._id})
     return {user, rider}
     }
     if(payload.role === Role.Driver){
 // create new rider
-    const driver = await Driver.create({
-        email: payload.email,
-        name: payload.name,
-        vehicleInfo:payload.vehicleInfo
-    })
+    const driver = await Driver.create(payload)
 // create new user
     const user = await User.create({...payload,driver:driver._id})
     return {user, driver}

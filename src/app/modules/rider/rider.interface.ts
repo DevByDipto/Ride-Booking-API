@@ -29,5 +29,5 @@ export interface IRider {
     googleId?:string
     role?: "rider"
     isBlocked?: boolean
-    phoneNumber?:number
+    phoneNumber?:string
 }
