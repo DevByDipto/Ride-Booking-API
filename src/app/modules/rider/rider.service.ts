@@ -1,6 +1,9 @@
 import { log } from "console"
 import { IRider } from "./rider.interface"
 import { Rider } from "./rider.model"
+import { User } from "../user/user.model"
+import bcrypt from "bcrypt"
+import { envVars } from "../../config/env"
 
 
 
@@ -24,15 +27,26 @@ const getRiderById = async (id: string) => {
 
 const updateRiderById = async (id: string, data: Partial<IRider>) => {
     // console.log(`Rider id from service ${id}`);
-
+let user;
     const rider = await Rider.findOneAndUpdate(
         { _id: id },
         { $set: data },
         { new: true }
     )
+
+    if (data.password) {
+        const salt = bcrypt.genSaltSync(Number(envVars.SALT));
+            const haspassword = bcrypt.hashSync(data.password as string, salt)
+            data.password = haspassword
+         user = await User.findOneAndUpdate(
+             { rider: id },
+        { $set: {password:data.password,name:data.name} },
+        { new: true }
+    )     
+    }
     // console.log("  Rider by id service",rider);
 
-    return rider
+    return {rider,user}
 }
 
 export const riderService = {

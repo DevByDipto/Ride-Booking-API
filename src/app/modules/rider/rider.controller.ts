@@ -32,15 +32,16 @@ const getRiderById = async(req: Request, res: Response, next: NextFunction) => {
 }
 const updateRiderById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
-    const data = req.body
-    const rider =await riderService.updateRiderById( id ,data)
+    let data = req.body
+    // if(data.password) 
+    const result = await riderService.updateRiderById( id ,data)
     // console.log(" Rider by id controller",rider);
     
    sendResponse(res, {
         statusCode: 200,
         success: true,  
         message: "Rider update Successfully",
-        data: rider,
+        data: result,
     })
 }
 export const riderControler = {
