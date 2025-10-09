@@ -1,12 +1,13 @@
 
 import { log } from "console"
-import { IDriver } from "./driver.interface"
+import { IDriver, TDriverUpdate } from "./driver.interface"
 import { User } from "../user/user.model"
 import { Driver } from "./driver.model"
 import { Rider } from "../rider/rider.model"
 import { IRider } from "../rider/rider.interface"
 import { AppError } from "../../utils/AppError"
-
+import bcrypt from "bcrypt"
+import { envVars } from "../../config/env"
 const creatDriver = async (payload: IDriver) => {
 
     const isUserExist = await User.findOne({ email: payload.email })
@@ -63,18 +64,29 @@ const updateDriverStatusByAdmin = async (id: string, data: Partial<IRider>) => {
         { new: true }
     )
     // console.log("  Rider by id service",rider);
-
     return driver
 }
-const updateDriverAvailability = async (id: string, data: Partial<IRider>) => {
+
+const updateDriverById = async (id: string, data: Partial<TDriverUpdate>) => {
     // console.log(`Rider id from service ${id}`);
     const driver = await Driver.findOneAndUpdate(
         { _id: id },
         { $set: data },
         { new: true }
-    )
-    // console.log("  Rider by id service",rider);
 
+    )
+     if (data.password) {
+            const salt = bcrypt.genSaltSync(Number(envVars.SALT));
+                const haspassword = bcrypt.hashSync(data.password as string, salt)
+                data.password = haspassword
+           const  user = await User.findOneAndUpdate(
+                 { rider: id },
+            { $set: {password:data.password,name:data.name} },
+            { new: true }
+        )  
+        return {driver,user}   
+        }
+    // console.log("  Rider by id service",rider);
     return driver
 }
 
@@ -83,5 +95,5 @@ export const driverService = {
     getAllDrivers,
     getDriverById,
     updateDriverStatusByAdmin,
-    updateDriverAvailability
+    updateDriverById
 }

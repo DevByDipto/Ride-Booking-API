@@ -4,7 +4,7 @@ import { checkAuth } from "../../middlewares/checkAuth"
 import { Role } from "../user/user.interface"
 import { validationRequest } from "../../middlewares/validateRequest"
 import { driverController } from "./driver.controller"
-import { adminUpdateDriverStatusZodSchema, createDriverSchema, updateDriverAvailabilityZodSchema } from "./driver.validation"
+import { adminUpdateDriverStatusZodSchema, createDriverSchema, updateDriverZodSchema } from "./driver.validation"
 
 
 const router = Router()
@@ -13,6 +13,6 @@ router.post('/',checkAuth(Role.Rider),validationRequest(createDriverSchema),driv
 router.get('/',checkAuth(Role.Admin),driverController.getAllDriver)
 router.get('/:driverId',checkAuth(Role.Driver),driverController.getDriverById)
 router.patch('/:driverId/status',checkAuth(Role.Admin),validationRequest(adminUpdateDriverStatusZodSchema),driverController.updateDriverStatusByAdmin)
-router.patch('/:driverId/availability',checkAuth(Role.Admin),validationRequest(updateDriverAvailabilityZodSchema),driverController.updateDriverAvailability)
+router.patch('/:driverId',checkAuth(Role.Driver),validationRequest(updateDriverZodSchema),driverController.updateDriverById)
 
 export const driverRouter = router

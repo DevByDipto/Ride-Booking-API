@@ -19,3 +19,13 @@ export interface IDriver {
     isApproved?:IsApproved
     phoneNumber:string
 }
+
+export interface TDriverUpdate {
+    id?:string
+    name: string
+    vehicleInfo:Vehicle
+    availability?:boolean
+    isApproved?:IsApproved
+    phoneNumber:string
+    password:string
+}

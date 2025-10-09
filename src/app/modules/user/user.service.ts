@@ -30,7 +30,7 @@ const createUser = async (payload: Partial<IUser>) => {
     return {user, rider}
     }
     if(payload.role === Role.Driver){
-// create new rider
+// create new driver
     const driver = await Driver.create(payload)
 // create new user
     const user = await User.create({...payload,driver:driver._id})
@@ -51,7 +51,7 @@ if (!token) {
 const verifiedToken = jwtHelpers.verifyToken(token,envVars.JWT_ACCESS_SECRET) as JwtPayload
 // console.log(verifiedToken);
 
-const user = await User.findOne({_id: verifiedToken.id}).populate("rider")
+const user = await User.findOne({_id: verifiedToken.id}).populate("rider").populate("driver")
 if(!user){
     return new AppError("User not found or account no longer exists", 404)
 }

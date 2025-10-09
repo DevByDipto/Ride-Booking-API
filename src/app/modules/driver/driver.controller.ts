@@ -54,10 +54,10 @@ const updateDriverStatusByAdmin = async(req: Request, res: Response, next: NextF
     })
 }
 
-const updateDriverAvailability = async(req: Request, res: Response, next: NextFunction) => {
+const updateDriverById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.driverId
     const data = req.body
-    const rider =await driverService.updateDriverAvailability(id,data)
+    const rider =await driverService.updateDriverById(id,data)
     
    sendResponse(res, {
         statusCode: 200,
@@ -72,5 +72,5 @@ export const driverController={
     getAllDriver,
     getDriverById,
     updateDriverStatusByAdmin,
-    updateDriverAvailability
+    updateDriverById
 }
