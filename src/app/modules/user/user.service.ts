@@ -3,9 +3,10 @@ import { envVars } from "../../config/env";
 import { AppError } from "../../utils/AppError";
 import { jwtHelpers } from "../../utils/jwt";
 import { Rider } from "../rider/rider.model";
-import { IUser } from "./user.interface";
+import { IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import bcrypt from "bcryptjs";
+import { Driver } from "../driver/driver.model";
 
 const createUser = async (payload: Partial<IUser>) => {
     // console.log(payload,"reom paylod");
@@ -21,6 +22,7 @@ const createUser = async (payload: Partial<IUser>) => {
     const haspassword = bcrypt.hashSync(payload.password as string, salt)
     payload.password = haspassword
     
+    if(payload.role === Role.Rider){
 // create new rider
     const rider = await Rider.create({
         email: payload.email,
@@ -28,9 +30,23 @@ const createUser = async (payload: Partial<IUser>) => {
     })
 // create new user
     const user = await User.create({...payload,rider:rider._id})
+    return {user, rider}
+    }
+    if(payload.role === Role.Driver){
+// create new rider
+    const driver = await Driver.create({
+        email: payload.email,
+        name: payload.name,
+        vehicleInfo:payload.vehicleInfo
+    })
+// create new user
+    const user = await User.create({...payload,driver:driver._id})
+    return {user, driver}
+    }
+
    
 
-    return {user, rider}
+    
 }
 
 const getMe =async (token: string)=>{

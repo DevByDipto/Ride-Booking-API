@@ -15,6 +15,6 @@ export interface IDriver {
     email: string
     role?: "driver"
     vehicleInfo:Vehicle
-    availability:boolean
+    availability?:boolean
     isApproved?:IsApproved
 }

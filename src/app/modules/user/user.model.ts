@@ -1,22 +1,24 @@
 import mongoose, { model, Types } from "mongoose"
 import { IUser, Role } from "./user.interface"
 import { Schema } from "mongoose"
+import { Vehicle } from "../driver/driver.interface"
 
 const userSchema = new Schema<IUser>({
      rider: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Rider", 
-    required: true,
+   
   },
      driver: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Drtiver", 
+    ref: "Driver", 
   },
   googleId:{type:String},
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
     password:{type:String,minlength:6},
-    role:{type:String,enum:Object.values(Role),default:'rider'},
+    role:{type:String,enum:Object.values(Role)},
+    vehicleInfo:{type:String,enum:Object.values(Vehicle)},
 },
 { timestamps: true,versionKey: false }
 )
