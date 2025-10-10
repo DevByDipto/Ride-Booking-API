@@ -65,6 +65,9 @@ const getRideById = async(req: Request, res: Response, next: NextFunction) => {
 
 const updateRideById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
+
+    console.log(req.params);
+    
     const data = req.body
     const ride =await rideService.updateRideById( id ,data)
     

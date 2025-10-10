@@ -1,6 +1,6 @@
 import { log } from "console"
 import { Ride } from "./ride.model"
-import { IRide, IRideQueryParams } from "./ride.interface"
+import { IRide, IRideQueryParams, IRideStatusUpdate } from "./ride.interface"
 import { Rider } from "../rider/rider.model"
 import { AppError } from "../../utils/AppError"
 import { th } from "zod/v4/locales"
@@ -29,15 +29,32 @@ const createRide = async (payload: IRide) => {
 
 
 const getAllRides = async (queryParams:IRideQueryParams) => {
-  const query: any = {};
-
-  if (queryParams.driverId) query.driver = new mongoose.Types.ObjectId(queryParams.driverId);
-  if (queryParams.riderId) query.rider = new mongoose.Types.ObjectId(queryParams.riderId);
+    const { driverId } = queryParams; // driverId optional, query parameter হিসেবে
+    const { status } = queryParams;
+    const { exclude } = queryParams;
+  let filter: any = {}
+  if (status === "requested") {
+      // 1️⃣ Requested rides only
+      filter.status = "requested";
+    } else if (exclude) {
+      // 2️⃣ Requested ও Cancelled বাদ দিয়ে, driverId filter
+      if (!driverId) {
+        // return res.status(400).json({
+        //   success: false,
+        //   message: "driverId is required when status is not 'requested'",
+        // });
+      }
+      filter.driver = driverId;
+       const statuses = (exclude as string).split(",");
+  filter.status = { $nin: statuses };
+    }
+  if (queryParams.driverId) filter.driver = new mongoose.Types.ObjectId(queryParams.driverId);
+  if (queryParams.riderId) filter.rider = new mongoose.Types.ObjectId(queryParams.riderId);
 
   const page = parseInt(queryParams?.page as string) || 1;
   const limit = parseInt(queryParams?.limit as string) || 10;
    
-  const result = await paginate(Ride, query, { page, limit });
+  const result = await paginate(Ride, filter, { page, limit });
 
   return result
 };
@@ -58,7 +75,7 @@ const getRideById = async (id: string) => {
 //     return "ride"
 // }
 
-const updateRideById = async (id: string, data: Partial<IRide>) => {
+const updateRideById = async (id: string, data:IRideStatusUpdate ) => {
 
     if(!data.driver && !data.rider){
         throw new AppError("You must provide driverId or riderId to update the ride", 400)
@@ -67,12 +84,13 @@ const updateRideById = async (id: string, data: Partial<IRide>) => {
     if(data.updatedBy === "rider" && data.status !== "requested"){
     throw new AppError("after accept the ride by driver rider cann't cancle the ride", 400)
     } // ai j cheking ta ami dilam aita to basically frontend theke e check hobe tahole amar ar kii korar dorkar chilo ? (support)
-
+console.log(data);
     const ride = await Ride.findOneAndUpdate(
-        { _id: id },
+        { _id: new mongoose.Types.ObjectId(id) },
         { $set: data },
         { new: true }
     )
+console.log(ride);
 
     return ride
 }

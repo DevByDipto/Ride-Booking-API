@@ -1,11 +1,13 @@
 import { Types } from "mongoose";
 import { Role } from "../user/user.interface";
 
-export interface IRideQueryParams {
+export interface IGetRideQueryParams {
   page?: string;
   limit?: string;
    riderId?:string,
     driverId?:string,
+    status: RideStatus.Requested,
+exclude:RideStatus.Requested | RideStatus.Cancelled
 }
 
 export enum RideStatus {
@@ -43,4 +45,12 @@ export interface IRide {
   updatedBy?: Role;
   fare: number;
   isPaymentCompleted?: boolean;
+}
+
+export interface IRideStatusUpdate{
+  rider?: Types.ObjectId;
+  driver?: Types.ObjectId;
+  updatedBy: Role;
+  status: RideStatus;
+  timestamps: IRideTimestamps;
 }

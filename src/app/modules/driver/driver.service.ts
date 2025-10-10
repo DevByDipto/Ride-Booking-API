@@ -69,6 +69,7 @@ const updateDriverStatusByAdmin = async (id: string, data: Partial<IRider>) => {
 
 const updateDriverById = async (id: string, data: Partial<TDriverUpdate>) => {
     // console.log(`Rider id from service ${id}`);
+    
     const driver = await Driver.findOneAndUpdate(
         { _id: id },
         { $set: data },
