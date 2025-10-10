@@ -9,12 +9,13 @@ import { send } from "process";
 
 const getAllRiders = async (req: Request, res: Response, next: NextFunction) => {
     const filters = req.query
-    const riders = await riderService.getAllRiders(filters)
+    const result = await riderService.getAllRiders(filters)
+    
     sendResponse(res, { 
         statusCode: 200,
         success: true, 
         message: "Riders Retrieved Successfully",       
-        data: riders,
+        ...result
     })
 }
 

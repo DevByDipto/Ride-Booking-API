@@ -16,13 +16,13 @@ const createDriver =async (req: Request, res: Response, next: NextFunction) => {
 }
 
 const getAllDriver = async (req: Request, res: Response, next: NextFunction) => {
-    const filters = req.query
-    const drivers = await driverService.getAllDrivers(filters)
+    const queryParams = req.query
+    const result = await driverService.getAllDrivers(queryParams)
     sendResponse(res, { 
         statusCode: 200,
         success: true, 
         message: "drivers Retrieved Successfully",       
-        data: drivers,
+        ...result
     })
 }
 

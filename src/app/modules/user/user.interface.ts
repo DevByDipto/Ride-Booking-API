@@ -19,3 +19,9 @@ export interface IUser {
     vehicleInfo?: Vehicle
     phoneNumber:string
 }
+
+export interface TAdminUpdate{
+    name: string
+        phoneNumber: string
+        password: string
+}

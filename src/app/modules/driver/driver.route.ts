@@ -12,7 +12,7 @@ const router = Router()
 router.post('/',checkAuth(Role.Rider),validationRequest(createDriverSchema),driverController.createDriver)
 router.get('/',checkAuth(Role.Admin),driverController.getAllDriver)
 router.get('/:driverId',checkAuth(Role.Driver),driverController.getDriverById)
-router.patch('/:driverId/status',checkAuth(Role.Admin),validationRequest(adminUpdateDriverStatusZodSchema),driverController.updateDriverStatusByAdmin)
+router.patch('/:driverId/approval-status',checkAuth(Role.Admin),validationRequest(adminUpdateDriverStatusZodSchema),driverController.updateDriverStatusByAdmin)
 router.patch('/:driverId',checkAuth(Role.Driver),validationRequest(updateDriverZodSchema),driverController.updateDriverById)
 
 export const driverRouter = router

@@ -1,6 +1,6 @@
 import { log } from "console"
 import { Ride } from "./ride.model"
-import { IRide, IRideQueryParams, IRideStatusUpdate } from "./ride.interface"
+import { IGetRideQueryParams, IRide, IRideStatusUpdate } from "./ride.interface"
 import { Rider } from "../rider/rider.model"
 import { AppError } from "../../utils/AppError"
 import { th } from "zod/v4/locales"
@@ -28,7 +28,8 @@ const createRide = async (payload: IRide) => {
 
 
 
-const getAllRides = async (queryParams:IRideQueryParams) => {
+const getAllRides = async (queryParams:IGetRideQueryParams) => {
+    
     const { driverId } = queryParams; // driverId optional, query parameter হিসেবে
     const { status } = queryParams;
     const { exclude } = queryParams;
@@ -76,7 +77,8 @@ const getRideById = async (id: string) => {
 // }
 
 const updateRideById = async (id: string, data:IRideStatusUpdate ) => {
-
+// console.log("updateRideById",data);
+// return ""
     if(!data.driver && !data.rider){
         throw new AppError("You must provide driverId or riderId to update the ride", 400)
     }
@@ -85,12 +87,18 @@ const updateRideById = async (id: string, data:IRideStatusUpdate ) => {
     throw new AppError("after accept the ride by driver rider cann't cancle the ride", 400)
     } // ai j cheking ta ami dilam aita to basically frontend theke e check hobe tahole amar ar kii korar dorkar chilo ? (support)
 console.log(data);
-    const ride = await Ride.findOneAndUpdate(
-        { _id: new mongoose.Types.ObjectId(id) },
-        { $set: data },
-        { new: true }
-    )
-console.log(ride);
+   const ride = await Ride.findOneAndUpdate(
+    { _id: id },
+    {
+      $set: {
+        status: data.status,
+        updatedBy: data.updatedBy,
+        driver: data.driver,
+        [`timestamps.${data.status}At`]: new Date().toISOString(),
+      },
+    },
+    { new: true }
+  );
 
     return ride
 }

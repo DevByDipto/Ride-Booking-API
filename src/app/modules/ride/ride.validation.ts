@@ -25,7 +25,7 @@ const rideTimestampsSchema = z.object({
     .transform((val) => (val ? new Date(val) : undefined)),
   acceptedAt: z.string().optional().transform((val) => (val ? new Date(val) : undefined)),
   pickedUpAt: z.string().optional().transform((val) => (val ? new Date(val) : undefined)),
-  inTransitAt: z.string().optional().transform((val) => (val ? new Date(val) : undefined)),
+  intransitedAt: z.string().optional().transform((val) => (val ? new Date(val) : undefined)),
   completedAt: z.string().optional().transform((val) => (val ? new Date(val) : undefined)),
   cancelledAt: z.string().optional().transform((val) => (val ? new Date(val) : undefined)),
 });

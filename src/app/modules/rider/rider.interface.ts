@@ -31,3 +31,9 @@ export interface IRider {
     isBlocked?: boolean
     phoneNumber?:string
 }
+
+export interface IGetAllRiderQuery{
+     page?: string; 
+  limit?: string;
+//   isBlocked:boolean;
+}

@@ -47,9 +47,25 @@ const getMe =  catchAsync(async (req: Request, res: Response, next: NextFunction
     })
 })
 
+const updateAdmin =  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id
+       const data = req.body
+       const rider =await UserService.updateAdmin(id,data)
+       
+      sendResponse(res, {
+           statusCode: 200,
+           success: true,  
+           message: "driver update  Successfull",
+           data: rider,
+       })
+})
+
+
+
 
 export const userController = {
     createUser,
     getAllUsers,
     getMe,
+    updateAdmin,
 }

@@ -1,19 +1,20 @@
 import { log } from "console"
-import { IRider } from "./rider.interface"
+import { IGetAllRiderQuery, IRider } from "./rider.interface"
 import { Rider } from "./rider.model"
 import { User } from "../user/user.model"
 import bcrypt from "bcrypt"
 import { envVars } from "../../config/env"
+import { paginate } from "../../utils/paginate"
 
 
 
-const getAllRiders = async (filters: any) => {
-    if (filters.isBlocked) {
-        const riders = await Rider.find({ isBlocked: filters.isBlocked })
-        return riders
-    }
-    const riders = await Rider.find()
-    return riders
+const getAllRiders = async (queryParams: IGetAllRiderQuery) => {
+    const page = parseInt(queryParams?.page as string) || 1;
+    const limit = parseInt(queryParams?.limit as string) || 10;
+    let filter = {}
+    // if (queryParams.isBlocked) filter = { isBlocked: queryParams.isBlocked }
+    const result = await paginate(Rider, filter, { page, limit });
+    return result
 }
 
 const getRiderById = async (id: string) => {
@@ -27,7 +28,7 @@ const getRiderById = async (id: string) => {
 
 const updateRiderById = async (id: string, data: Partial<IRider>) => {
     // console.log(`Rider id from service ${id}`);
-let user;
+    let user;
     const rider = await Rider.findOneAndUpdate(
         { _id: id },
         { $set: data },
@@ -36,17 +37,17 @@ let user;
 
     if (data.password) {
         const salt = bcrypt.genSaltSync(Number(envVars.SALT));
-            const haspassword = bcrypt.hashSync(data.password as string, salt)
-            data.password = haspassword
-         user = await User.findOneAndUpdate(
-             { rider: id },
-        { $set: {password:data.password,name:data.name} },
-        { new: true }
-    )     
+        const haspassword = bcrypt.hashSync(data.password as string, salt)
+        data.password = haspassword
+        user = await User.findOneAndUpdate(
+            { rider: id },
+            { $set: { password: data.password, name: data.name } },
+            { new: true }
+        )
     }
     // console.log("  Rider by id service",rider);
 
-    return {rider,user}
+    return { rider, user }
 }
 
 export const riderService = {

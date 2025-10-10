@@ -29,3 +29,9 @@ export interface TDriverUpdate {
     phoneNumber:string
     password:string
 }
+
+export interface IGetAllDriverQuery{
+   page?: string; 
+  limit?: string;
+  // isApproved:IsApproved
+}

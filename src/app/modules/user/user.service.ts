@@ -3,7 +3,7 @@ import { envVars } from "../../config/env";
 import { AppError } from "../../utils/AppError";
 import { jwtHelpers } from "../../utils/jwt";
 import { Rider } from "../rider/rider.model";
-import { IUser, Role } from "./user.interface";
+import { IUser, Role, TAdminUpdate } from "./user.interface";
 import { User } from "./user.model";
 import bcrypt from "bcryptjs";
 import { Driver } from "../driver/driver.model";
@@ -60,7 +60,25 @@ if(!user){
 return user
 }
 
+const updateAdmin = async (id: string, data: TAdminUpdate) => {
+    // console.log(`Rider id from service ${id}`);
+    
+     if (data.password) {
+            const salt = bcrypt.genSaltSync(Number(envVars.SALT));
+                const haspassword = bcrypt.hashSync(data.password as string, salt)
+                data.password = haspassword
+        }
+
+        const  user = await User.findOneAndUpdate(
+                 { _id: id },
+            { $set: data },
+            { new: true }
+        )  
+    return user
+}
+
 export const UserService = {
     createUser,
     getMe,
+    updateAdmin
 }

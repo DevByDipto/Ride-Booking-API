@@ -16,7 +16,7 @@ const RideTimestampsSchema = new Schema(
     requestedAt: { type: Date, default: Date.now },
     acceptedAt: { type: Date,default:null },
     pickedUpAt: { type: Date,default:null },
-    inTransitAt: { type: Date,default:null },
+    intransitedAt: { type: Date,default:null },
     completedAt: { type: Date,default:null },
     cancelledAt: { type: Date,default:null },
   },

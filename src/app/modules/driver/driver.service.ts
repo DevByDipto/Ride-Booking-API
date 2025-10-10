@@ -1,6 +1,6 @@
 
 import { log } from "console"
-import { IDriver, TDriverUpdate } from "./driver.interface"
+import { IDriver, IGetAllDriverQuery, TDriverUpdate } from "./driver.interface"
 import { User } from "../user/user.model"
 import { Driver } from "./driver.model"
 import { Rider } from "../rider/rider.model"
@@ -8,6 +8,7 @@ import { IRider } from "../rider/rider.interface"
 import { AppError } from "../../utils/AppError"
 import bcrypt from "bcrypt"
 import { envVars } from "../../config/env"
+import { paginate } from "../../utils/paginate"
 const creatDriver = async (payload: IDriver) => {
 
     const isUserExist = await User.findOne({ email: payload.email })
@@ -37,13 +38,14 @@ const creatDriver = async (payload: IDriver) => {
     return driver
 }
 
-const getAllDrivers = async (filters: any) => {
-    if (filters.isApproved) {
-        const drivers = await Driver.find({ isApproved: filters.isApproved })
-        return drivers
-    }
-    const drivers = await Driver.find()
-    return drivers
+const getAllDrivers = async (queryParams: IGetAllDriverQuery) => {
+    const page = parseInt(queryParams?.page as string) || 1;
+    const limit = parseInt(queryParams?.limit as string) || 10;
+    let filter = {}
+    // if (queryParams.isApproved) filter= {isApproved:queryParams.isApproved}
+    const result = await paginate(Driver, filter, { page, limit });
+    
+       return result
 }
 
 const getDriverById = async (id: string) => {
