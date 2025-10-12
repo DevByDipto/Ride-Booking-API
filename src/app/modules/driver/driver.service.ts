@@ -76,21 +76,24 @@ const updateDriverById = async (id: string, data: Partial<TDriverUpdate>) => {
         { _id: id },
         { $set: data },
         { new: true }
-
+ 
     )
-     if (data.password) {
+
+    const driverUser = await User.findOne({ driver: id })
+    console.log(driverUser?.password);
+    const isPssMatch = driverUser?.password === data?.password
+    
+     if (!isPssMatch) {
             const salt = bcrypt.genSaltSync(Number(envVars.SALT));
                 const haspassword = bcrypt.hashSync(data.password as string, salt)
                 data.password = haspassword
-           const  user = await User.findOneAndUpdate(
-                 { rider: id },
+                      }
+    const user = await User.findOneAndUpdate(
+                 { driver: id },
             { $set: {password:data.password,name:data.name} },
             { new: true }
         )  
         return {driver,user}   
-        }
-    // console.log("  Rider by id service",rider);
-    return driver
 }
 
 export const driverService = {

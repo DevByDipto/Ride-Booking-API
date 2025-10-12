@@ -62,13 +62,15 @@ return user
 
 const updateAdmin = async (id: string, data: TAdminUpdate) => {
     // console.log(`Rider id from service ${id}`);
-    
-     if (data.password) {
+ 
+    const adminUser = await User.findOne({ _id: id })
+    console.log(adminUser?.password);
+    const isPssMatch = adminUser?.password === data?.password
+     if (!isPssMatch) {
             const salt = bcrypt.genSaltSync(Number(envVars.SALT));
                 const haspassword = bcrypt.hashSync(data.password as string, salt)
                 data.password = haspassword
         }
-
         const  user = await User.findOneAndUpdate(
                  { _id: id },
             { $set: data },

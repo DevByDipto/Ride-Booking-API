@@ -28,7 +28,7 @@ export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Resp
         if (!user) {
             throw new AppError("User does not exist", 400)
         }
-        // console.log(user.role, role);
+        console.log(verifiedToken.role);
 
         if (!authRole.includes(verifiedToken.role)) {
             throw new AppError("You are not authorized to access this route", 403)

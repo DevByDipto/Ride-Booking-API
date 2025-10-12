@@ -28,25 +28,28 @@ const getRiderById = async (id: string) => {
 
 const updateRiderById = async (id: string, data: Partial<IRider>) => {
     // console.log(`Rider id from service ${id}`);
-    let user;
+
     const rider = await Rider.findOneAndUpdate(
         { _id: id },
         { $set: data },
         { new: true }
     )
-
-    if (data.password) {
+    if(data.password){
+ const riderUser = await User.findOne({ rider: id })
+    const isPssMatch = riderUser?.password === data?.password
+    if (!isPssMatch) {
         const salt = bcrypt.genSaltSync(Number(envVars.SALT));
         const haspassword = bcrypt.hashSync(data.password as string, salt)
         data.password = haspassword
-        user = await User.findOneAndUpdate(
+    }
+    }
+
+    // console.log("  Rider by id service",rider);
+  const user = await User.findOneAndUpdate(
             { rider: id },
             { $set: { password: data.password, name: data.name } },
             { new: true }
         )
-    }
-    // console.log("  Rider by id service",rider);
-
     return { rider, user }
 }
 

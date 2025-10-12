@@ -18,7 +18,7 @@ const userSchema = new Schema<IUser>({
     email:{type:String,required:true,unique:true},
     password:{type:String,minlength:6,required:true},
     role:{type:String,enum:Object.values(Role),required:true},
-    vehicleInfo:{type:String,enum:Object.values(Vehicle)},
+    // vehicleInfo:{type:String,enum:Object.values(Vehicle)},
     phoneNumber:{type:String,required:true},
 },
 { timestamps: true,versionKey: false }
