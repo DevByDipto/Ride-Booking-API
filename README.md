@@ -85,10 +85,23 @@ npm install
 #### 3️⃣ Configure Environment Variables
 ```
 PORT=5000
-DATABASE_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/rideBooking
-JWT_SECRET=your_jwt_secret_key
+MONGO_URI=mongodb+srv://<username>:<password>.nc8opzq.mongodb.net/<username>?retryWrites=true&w=majority&appName=Cluster0
+NODE_ENV=development
+
+#auth
+GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET=YOUR_GOOGLE_CLIENT_SECRET
+SESSION_SECRET=your-random-session-secret
+
 SALT=10
-CLIENT_URL=http://localhost:5173
+
+JWT_ACCESS_SECRET=secret
+JWT_REFRESH_SECRET=secret
+JWT_ACCESS_EXPIRES=1d
+JWT_REFRESH_EXPIRES=1d
+
+
+
 ```
 #### 4️⃣ Run the Development Server
 ```
