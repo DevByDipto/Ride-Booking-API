@@ -15,7 +15,7 @@ export const app = express()
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:5173", // ✅ নির্দিষ্ট করে দাও
+    origin: envVars.CLIENT_URL, // ✅ নির্দিষ্ট করে দাও
     credentials: true, // ✅ cookies/token allow করার জন্য
   }))
 

@@ -3,7 +3,7 @@ dotenv.config() // keno dilam ?
 
 
 const loadEnvVariable = () => { // aikhane to ami bole e dicchi j PORT: process.env.PORT as string mane port string hobe tahole abar EnvConfig korar dorkar kii?
-    const requredEnvVariables: string[] = ["PORT", 'MONGO_URI', "NODE_ENV", "SESSION_SECRET", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "SALT","JWT_ACCESS_SECRET","JWT_REFRESH_SECRET","JWT_ACCESS_EXPIRES","JWT_REFRESH_EXPIRES"]
+    const requredEnvVariables: string[] = ["PORT", 'MONGO_URI', "NODE_ENV", "SESSION_SECRET", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "SALT","JWT_ACCESS_SECRET","JWT_REFRESH_SECRET","JWT_ACCESS_EXPIRES","JWT_REFRESH_EXPIRES","CLIENT_URL"]
     requredEnvVariables.forEach(key => {
         if (!process.env[key]) {
             throw new Error(`Missing require enviroment variable ${key}`)
@@ -21,6 +21,7 @@ const loadEnvVariable = () => { // aikhane to ami bole e dicchi j PORT: process.
         JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET as string,
         JWT_ACCESS_EXPIRES: process.env.JWT_ACCESS_EXPIRES as string,
         JWT_REFRESH_EXPIRES: process.env.JWT_REFRESH_EXPIRES as string,
+        CLIENT_URL: process.env.CLIENT_URL as string,
     }
 }
 
