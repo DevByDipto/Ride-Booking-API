@@ -13,7 +13,7 @@ const createRide =async (req: Request, res: Response, next: NextFunction) => {
     sendResponse(res, {
         statusCode: 200,
         success: true,
-        message: "drivers Created Successfully",
+        message: "drive Created Successfully",
         data: result,
     })
 }

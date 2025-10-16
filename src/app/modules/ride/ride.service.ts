@@ -86,7 +86,7 @@ const updateRideById = async (id: string, data:IRideStatusUpdate ) => {
     if(data.updatedBy === "rider" && data.status !== "requested"){
     throw new AppError("after accept the ride by driver rider cann't cancle the ride", 400)
     } // ai j cheking ta ami dilam aita to basically frontend theke e check hobe tahole amar ar kii korar dorkar chilo ? (support)
-console.log(data);
+// console.log(data);
    const ride = await Ride.findOneAndUpdate(
     { _id: id },
     {

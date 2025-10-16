@@ -9,7 +9,7 @@ import bcrypt from "bcryptjs";
 import { Driver } from "../driver/driver.model";
 
 const createUser = async (payload: Partial<IUser>) => {
-    console.log(payload,"reom paylod");
+    // console.log(payload,"reom paylod");
 
     const isUserExist = await User.findOne({ email: payload.email })
     // console.log(isUserExist);

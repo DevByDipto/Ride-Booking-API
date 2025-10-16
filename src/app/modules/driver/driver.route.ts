@@ -9,7 +9,7 @@ import { adminUpdateDriverStatusZodSchema, createDriverSchema, updateDriverZodSc
 
 const router = Router()
 
-router.post('/',checkAuth(Role.Rider),validationRequest(createDriverSchema),driverController.createDriver)
+// router.post('/',checkAuth(Role.Rider),validationRequest(createDriverSchema),driverController.createDriver)
 router.get('/',checkAuth(Role.Admin),driverController.getAllDriver)
 router.get('/:driverId',checkAuth(Role.Driver),driverController.getDriverById)
 router.patch('/:driverId/approval-status',checkAuth(Role.Admin),validationRequest(adminUpdateDriverStatusZodSchema),driverController.updateDriverStatusByAdmin)

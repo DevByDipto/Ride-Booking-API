@@ -9,8 +9,8 @@ import { rideZodSchema, updateRideZodSchema } from "./ride.validation"
 const router = Router()
 
 router.post('/',checkAuth(Role.Rider),validationRequest(rideZodSchema),rideController.createRide)
-router.get('/',checkAuth(Role.Admin,Role.Rider,Role.Driver),rideController.getAllRides)  // jodi shobai e aii route er access pay thole security issue hobe nah ? (support)
-router.get('/:id',checkAuth(Role.Admin,Role.Rider,Role.Driver),rideController.getRideById)
+router.get('/',checkAuth(Role.Admin,Role.Rider,Role.Driver),rideController.getAllRides)  // jodi shobai e aii route er access pay thole security issue hobe nah ? (support) 
+router.get('/:id',checkAuth(Role.Admin,Role.Rider,Role.Driver),rideController.getRideById)      
 // router.get('/',checkAuth(Role.Admin,Role.Rider,Role.Driver),rideController.getRideByDriverAndRiderId)
 router.patch('/:id',checkAuth(Role.Rider,Role.Driver),validationRequest(updateRideZodSchema),rideController.updateRideById)
 

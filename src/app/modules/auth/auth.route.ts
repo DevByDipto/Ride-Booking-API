@@ -25,7 +25,6 @@ router.get('/google/callback',
 );
 
 
-
 // Login route with custom callback
 router.post('/login', AuthControllers.credentialLogin);
 router.post("/refresh-token", AuthControllers.getNewAccessToken)
