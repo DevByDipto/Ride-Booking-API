@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "0a4da51b-0663-4a99-b33a-ae76c8b92392",
+		"name": "Ride Booking API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47846438",
+		"_collection_link": "https://dipto-ghosh-s-team.postman.co/workspace/Team-Workspace~1a662cee-2c49-4b5b-843a-95f3108befd6/collection/47846438-0a4da51b-0663-4a99-b33a-ae76c8b92392?action=share&source=collection_link&creator=47846438"
+	},
+	"item": [
+		{
+			"name": "rider",
+			"item": [
+				{
+					"name": "get all riders",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get rider by Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get all block riders",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update riders by id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDYwZWZkMzQ4YmQwMmNlNDhlNWYxZSIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU4ODgwNjc5LCJleHAiOjE3NTg5NjcwNzl9.-2VoLWS5TZ3Sp86GAKrqG6IghMa8kZ7zzyNVnu9VkFc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"isBlocked\":\"hello\",\r\n    \"age\":\"hello\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/rider/68d6071e61e14af52db78b90",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"rider",
+								"68d6071e61e14af52db78b90"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get all user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"dipto\",\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "driver",
+			"item": [
+				{
+					"name": "update drivers by admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDQwNzRiODRiMWI3NDllOGM3NjUwYyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU4Nzk3NzY5LCJleHAiOjE3NTg4ODQxNjl9._qDQs3jTUQHb9V9QuOl0rAEr_m8GtPGkQqI72aMz0QQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " { \"isApproved\": \"approved\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/driver/68d51eceef35f6e1234ee5ab/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"driver",
+								"68d51eceef35f6e1234ee5ab",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update drivers availability",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDQwNzRiODRiMWI3NDllOGM3NjUwYyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzU4Nzk3NzY5LCJleHAiOjE3NTg4ODQxNjl9._qDQs3jTUQHb9V9QuOl0rAEr_m8GtPGkQqI72aMz0QQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " { \"isApproved\": \"approved\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/driver/68d51eceef35f6e1234ee5ab/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"driver",
+								"68d51eceef35f6e1234ee5ab",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all drivers",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get driver by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "risde",
+			"item": [
+				{
+					"name": "create ride",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "POST http://localhost:5000/api/ride",
+							"protocol": "POST http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ride"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all ride",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZWI5YzZjNzk2YjM3YTIzMGQxN2E1NSIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzYwNjI5OTk5LCJleHAiOjE3NjA3MTYzOTl9.N-i0mFVcjHJPVh0lf8IyJ4SckHsxg2gESSipzsJhbwg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/ride?riderId=68e879709316355bb6913af6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ride"
+							],
+							"query": [
+								{
+									"key": "riderId",
+									"value": "68e879709316355bb6913af6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ride by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update ride by id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDYwZWZkMzQ4YmQwMmNlNDhlNWYxZSIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzU5NTY4NzU2LCJleHAiOjE3NTk2NTUxNTZ9.ODe2GcilFyuRxDZGQBQt84TOSaacDhC_4WD3C-fZvZY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"driverId\": \"68d5f783f95335e017f953a8\",\r\n  \"status\": \"picked-up\",\r\n  \"updatedBy\": \"driver\",\r\n  \"timestamps\": {\r\n    \"acceptedAt\": \"2025-09-17T04:30:00.000Z\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/ride/68d60d9a22d27fd426f5d351",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"ride",
+								"68d60d9a22d27fd426f5d351"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "logout user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

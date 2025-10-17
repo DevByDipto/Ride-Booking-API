@@ -13,7 +13,7 @@ export interface IGetRideQueryParams {
 }
 
 export enum RideStatus {
-  Requested = "requested", //(support) value capital letter diye shuru hobe naki small letter diye  ??
+  Requested = "requested", 
   Accepted = "accepted",
   PickedUp = "picked-up",
   Intransited = "intransited",
