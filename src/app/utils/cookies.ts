@@ -16,6 +16,7 @@ res.cookie('accessToken', tokenInfo.accessToken, {
     secure:true,
     sameSite: "none",
     // maxAge,
+    // domain: "ride-booking-client-teal.vercel.app",
   });
   }
 
@@ -25,6 +26,7 @@ res.cookie('refreshToken', tokenInfo.refreshToken, {
     secure: true,
     sameSite: "none",
     // maxAge,
+    // domain: "ride-booking-client-teal.vercel.app",
   });
   }
   

@@ -39,16 +39,18 @@ const credentialLogin =(req:Request, res:Response, next:NextFunction) => {
         message: info ? info.message : 'Login failed' 
       });
     }
-    // console.log("it's work");
+    console.log("it's work");
     
     
     // throw new Error("made by me") // line 40
     // console.log(user);
     
     
+    console.log(user);
     
     const userTokens = createUserToken(user);
     setAuthCookie(res, userTokens);
+  console.log({userTokens});
   
     res.json({
       success: true,
