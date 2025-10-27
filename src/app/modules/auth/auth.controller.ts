@@ -8,6 +8,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { set } from "mongoose";
 import { success } from "zod";
+import { envVars } from "../../config/env";
 
 
 const googleCallBackUrl = (req: Request, res: Response, next: NextFunction) => {
@@ -87,19 +88,24 @@ return sendResponse(res, {
 
 
 const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
+// console.log();
 
    res.clearCookie('accessToken', {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+  sameSite: "none" as const,
+   path: '/',
+  encode: String,
   })
 
   res.clearCookie('refreshToken', {
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+    sameSite: "none" as const,
+   path: '/',
+  encode: String,
   })
- 
+//  console.log('Response headers:', res.getHeaders());
    sendResponse(res, {
         success: true,
         statusCode: 200,

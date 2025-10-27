@@ -8,15 +8,15 @@ export interface AuthToken{
 }
 
 export const setAuthCookie = (res: Response, tokenInfo:AuthToken) => {
-  const maxAge = 1 * 24 * 60 * 60 * 1000; // days → ms
+
 
   if(tokenInfo.accessToken){
 res.cookie('accessToken', tokenInfo.accessToken, {
     httpOnly: true,
     secure:true,
-    sameSite: "none",
-    // maxAge,
-    // domain: "ride-booking-client-teal.vercel.app",
+    sameSite: "none" as const,
+   path: '/',
+  encode: String,
   });
   }
 
@@ -24,9 +24,10 @@ res.cookie('accessToken', tokenInfo.accessToken, {
 res.cookie('refreshToken', tokenInfo.refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
-    // maxAge,
-    // domain: "ride-booking-client-teal.vercel.app",
+    sameSite: "none" as const,
+   path: '/',
+  encode: String,
+
   });
   }
   

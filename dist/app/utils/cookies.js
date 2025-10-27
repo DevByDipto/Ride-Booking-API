@@ -9,6 +9,7 @@ const setAuthCookie = (res, tokenInfo) => {
             secure: true,
             sameSite: "none",
             // maxAge,
+            // domain: "ride-booking-client-teal.vercel.app",
         });
     }
     if (tokenInfo.refreshToken) {
@@ -17,6 +18,7 @@ const setAuthCookie = (res, tokenInfo) => {
             secure: true,
             sameSite: "none",
             // maxAge,
+            // domain: "ride-booking-client-teal.vercel.app",
         });
     }
 };
