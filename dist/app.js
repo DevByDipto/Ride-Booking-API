@@ -18,7 +18,7 @@ exports.app = (0, express_1.default)();
 exports.app.use((0, cookie_parser_1.default)());
 exports.app.use(express_1.default.json());
 exports.app.use((0, cors_1.default)({
-    origin: env_1.envVars.CLIENT_URL, // ✅ নির্দিষ্ট করে দাও
+    origin: 'https://ride-booking-client.web.app', // ✅ নির্দিষ্ট করে দাও
     credentials: true, // ✅ cookies/token allow করার জন্য
 }));
 exports.app.use((0, express_session_1.default)({

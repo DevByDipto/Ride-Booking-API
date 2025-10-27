@@ -75,16 +75,10 @@ const getNewAccessToken = (0, catchAsync_1.catchAsync)((req, res, next) => __awa
 }));
 // await authService.getNewAccessToken(refreshToken)
 const logout = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    res.clearCookie('accessToken', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-    });
-    res.clearCookie('refreshToken', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-    });
+    // console.log();
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    //  console.log('Response headers:', res.getHeaders());
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: 200,
@@ -92,6 +86,19 @@ const logout = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0
         data: null,
     });
 }));
+// const logout = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+//   // Manual set-cookie header দিয়ে try করো
+//   res.setHeader('Set-Cookie', [
+//     'accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=None',
+//     'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=None'
+//   ]);
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: 200,
+//     message: "User Logged Out Successfully",
+//     data: null,
+//   });
+// });
 exports.AuthControllers = {
     googleCallBackUrl,
     credentialLogin,

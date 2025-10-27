@@ -16,7 +16,7 @@ res.cookie('accessToken', tokenInfo.accessToken, {
     secure:true,
     sameSite: "none" as const,
    path: '/',
-  encode: String,
+  // encode: String,
   });
   }
 
@@ -26,7 +26,7 @@ res.cookie('refreshToken', tokenInfo.refreshToken, {
     secure: true,
     sameSite: "none" as const,
    path: '/',
-  encode: String,
+  // encode: String,
 
   });
   }

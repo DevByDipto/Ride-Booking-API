@@ -90,21 +90,9 @@ return sendResponse(res, {
 const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
 // console.log();
 
-   res.clearCookie('accessToken', {
-    httpOnly: true,
-    secure: true,
-  sameSite: "none" as const,
-   path: '/',
-  encode: String,
-  })
+   res.clearCookie('accessToken' )
 
-  res.clearCookie('refreshToken', {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none" as const,
-   path: '/',
-  encode: String,
-  })
+  res.clearCookie('refreshToken')
 //  console.log('Response headers:', res.getHeaders());
    sendResponse(res, {
         success: true,
@@ -113,6 +101,22 @@ const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) =>
         data: null,
     })
 })
+
+
+// const logout = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+//   // Manual set-cookie header দিয়ে try করো
+//   res.setHeader('Set-Cookie', [
+//     'accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=None',
+//     'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=None'
+//   ]);
+
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: 200,
+//     message: "User Logged Out Successfully",
+//     data: null,
+//   });
+// });
 export const AuthControllers = {
     googleCallBackUrl,
     credentialLogin,
