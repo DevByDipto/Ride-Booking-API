@@ -93,8 +93,8 @@ const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) =>
    res.clearCookie('accessToken', {
     httpOnly: true,
     secure: true,
-    sameSite: "none" as const,
-   path: '/',
+    sameSite: "none",
+  //  path: '/',
   // encode: String,
 
   })
@@ -102,8 +102,8 @@ const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) =>
   res.clearCookie('refreshToken',{
     httpOnly: true,
     secure: true,
-    sameSite: "none" as const,
-   path: '/',
+    sameSite: "none",
+  //  path: '/',
   // encode: String,
 
   })

@@ -14,8 +14,8 @@ export const setAuthCookie = (res: Response, tokenInfo:AuthToken) => {
 res.cookie('accessToken', tokenInfo.accessToken, {
     httpOnly: true,
     secure:true,
-    sameSite: "none" as const,
-   path: '/',
+    sameSite: "none",
+  //  path: '/',
   // encode: String,
   });
   }
@@ -24,8 +24,8 @@ res.cookie('accessToken', tokenInfo.accessToken, {
 res.cookie('refreshToken', tokenInfo.refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none" as const,
-   path: '/',
+    sameSite: "none" ,
+  //  path: '/',
   // encode: String,
 
   });
