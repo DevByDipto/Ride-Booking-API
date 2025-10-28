@@ -15,12 +15,16 @@ const passport_1 = __importDefault(require("passport"));
 require("./app/config/passport");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 exports.app = (0, express_1.default)();
+exports.app.use((0, cors_1.default)({
+    origin: 'https://lively-ganache-03dd6f.netlify.app',
+    // ✅ নির্দিষ্ট করে দাও
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] // ✅ cookies/token allow করার জন্য
+}));
+exports.app.options('*', (0, cors_1.default)());
 exports.app.use((0, cookie_parser_1.default)());
 exports.app.use(express_1.default.json());
-exports.app.use((0, cors_1.default)({
-    origin: 'https://ride-booking-client.web.app', // ✅ নির্দিষ্ট করে দাও
-    credentials: true, // ✅ cookies/token allow করার জন্য
-}));
 exports.app.use((0, express_session_1.default)({
     secret: env_1.envVars.SESSION_SECRET,
     resave: false,

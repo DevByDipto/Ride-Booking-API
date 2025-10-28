@@ -12,14 +12,17 @@ import cookieParser from "cookie-parser"
 
 export const app = express()
 
+
+app.use(cors({
+    origin: 'https://lively-ganache-03dd6f.netlify.app',
+     // ✅ নির্দিষ্ট করে দাও
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] // ✅ cookies/token allow করার জন্য
+  }))
+// app.options('*', cors());
 app.use(cookieParser())
 app.use(express.json())
-app.use(cors({
-    origin: 'https://ride-booking-client.web.app', // ✅ নির্দিষ্ট করে দাও
-    credentials: true, // ✅ cookies/token allow করার জন্য
-  }))
-
-
 app.use(session({
   secret: envVars.SESSION_SECRET,
   resave: false,
