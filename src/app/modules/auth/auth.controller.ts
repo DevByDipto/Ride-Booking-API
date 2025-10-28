@@ -90,9 +90,23 @@ return sendResponse(res, {
 const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
 // console.log();
 
-   res.clearCookie('accessToken' )
+   res.clearCookie('accessToken', {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none" as const,
+   path: '/',
+  // encode: String,
 
-  res.clearCookie('refreshToken')
+  })
+
+  res.clearCookie('refreshToken',{
+    httpOnly: true,
+    secure: true,
+    sameSite: "none" as const,
+   path: '/',
+  // encode: String,
+
+  })
 //  console.log('Response headers:', res.getHeaders());
    sendResponse(res, {
         success: true,
