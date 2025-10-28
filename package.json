@@ -1,8 +1,8 @@
 {
   "scripts": {
     "dev": "nodemon ./src/server.ts",
-    "start": "node dist/server.js",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
