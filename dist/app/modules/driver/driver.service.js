@@ -45,9 +45,9 @@ const getAllDrivers = (queryParams) => __awaiter(void 0, void 0, void 0, functio
     return result;
 });
 const getDriverById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(`Rider id from service ${id}`);
+    // console.log(`Rider id from service ${id}`);
     const driver = yield driver_model_1.Driver.findById(id);
-    console.log("driver by id service", driver);
+    // console.log("driver by id service", driver);
     return driver;
 });
 const updateDriverStatusByAdmin = (id, data) => __awaiter(void 0, void 0, void 0, function* () {

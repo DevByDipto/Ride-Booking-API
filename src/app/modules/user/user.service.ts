@@ -47,7 +47,7 @@ const getMe =async (token: string)=>{
 if (!token) {
     return new AppError("token not found",401)
 }
- 
+  token = token.split(" ")[1];
 const verifiedToken = jwtHelpers.verifyToken(token,envVars.JWT_ACCESS_SECRET) as JwtPayload
 // console.log(verifiedToken);
 

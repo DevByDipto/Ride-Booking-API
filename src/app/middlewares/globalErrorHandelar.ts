@@ -11,7 +11,7 @@ import { AppError } from "../utils/AppError";
 
 export const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
     if (envVars.NODE_ENV === "development") {
-        console.log(err);
+        // console.log(err);
     }
 
     let errorSources: TErrorSources[] = []

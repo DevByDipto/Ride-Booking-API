@@ -34,7 +34,7 @@ const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFun
 )
 
 const getMe =  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req?.cookies?.accessToken || req?.headers?.authorization
+    const token = req?.headers?.authorization as string //req?.cookies?.accessToken || 
     // console.log(token);
     
     const result = await UserService.getMe(token)

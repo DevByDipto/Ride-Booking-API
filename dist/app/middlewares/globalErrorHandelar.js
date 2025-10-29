@@ -9,7 +9,7 @@ const handlerZodError_1 = require("../helpers/handlerZodError");
 const AppError_1 = require("../utils/AppError");
 const globalErrorHandler = (err, req, res, next) => {
     if (env_1.envVars.NODE_ENV === "development") {
-        console.log(err);
+        // console.log(err);
     }
     let errorSources = [];
     let statusCode = 500;

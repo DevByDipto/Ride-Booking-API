@@ -36,7 +36,7 @@ const getAllRides = async (req: Request, res: Response, next: NextFunction) => {
 
 const getRideById = async(req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
-    console.log(id);
+    // console.log(id);
     
     const ride =await rideService.getRideById(id)
     // console.log(" ride by id controller",ride);

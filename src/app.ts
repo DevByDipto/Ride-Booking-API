@@ -23,12 +23,12 @@ app.use(cors({
 // app.options('*', cors());
 app.use(cookieParser())
 app.use(express.json())
-// app.use(session({
-//   secret: envVars.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: { secure: false } // Set to true if using HTTPS
-// }));
+app.use(session({
+  secret: envVars.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 // Initialize passport
 app.use(passport.initialize());

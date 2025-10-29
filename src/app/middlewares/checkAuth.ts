@@ -11,13 +11,15 @@ import { Role } from "../modules/user/user.interface";
 export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Response, next: NextFunction) => {
     try {
 
-        const accessToken = req?.cookies?.accessToken || req?.headers?.authorization
+        const authHeader = req?.headers?.authorization //req?.cookies?.accessToken || 
 // console.log("accessToken",accessToken);
 // console.log("req?.cookies",req.cookies);
 
-        if (!accessToken) {
-            throw new AppError("No Token Recieved", 403)
-        }
+if (!authHeader) {
+    throw new AppError("No Token Recieved", 403)
+}
+
+  const accessToken = authHeader.split(" ")[1];
 
         const verifiedToken = jwtHelpers.verifyToken(accessToken, envVars.JWT_ACCESS_SECRET) as JwtPayload
 // console.log("verifiedToken",verifiedToken);
@@ -28,7 +30,7 @@ export const checkAuth = (...authRole: Role[]) => async (req: Request, res: Resp
         if (!user) {
             throw new AppError("User does not exist", 400)
         }
-        console.log(verifiedToken.role);
+        // console.log(verifiedToken.role);
 
         if (!authRole.includes(verifiedToken.role)) {
             throw new AppError("You are not authorized to access this route", 403)

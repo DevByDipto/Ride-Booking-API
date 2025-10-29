@@ -62,7 +62,7 @@ const getMe = (token) => __awaiter(void 0, void 0, void 0, function* () {
 const updateAdmin = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log(`Rider id from service ${id}`);
     const adminUser = yield user_model_1.User.findOne({ _id: id });
-    console.log(adminUser === null || adminUser === void 0 ? void 0 : adminUser.password);
+    // console.log(adminUser === null || adminUser === void 0 ? void 0 : adminUser.password);
     const isPssMatch = (adminUser === null || adminUser === void 0 ? void 0 : adminUser.password) === (data === null || data === void 0 ? void 0 : data.password);
     if (!isPssMatch) {
         const salt = bcryptjs_1.default.genSaltSync(Number(env_1.envVars.SALT));

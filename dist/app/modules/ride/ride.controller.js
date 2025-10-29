@@ -29,7 +29,7 @@ const getAllRides = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
 });
 const getRideById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    console.log(id);
+    // console.log(id);
     const ride = yield ride_service_1.rideService.getRideById(id);
     // console.log(" ride by id controller",ride);
     (0, sendResponse_1.sendResponse)(res, {

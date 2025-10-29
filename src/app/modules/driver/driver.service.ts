@@ -49,10 +49,10 @@ const getAllDrivers = async (queryParams: IGetAllDriverQuery) => {
 }
 
 const getDriverById = async (id: string) => {
-    console.log(`Rider id from service ${id}`);
+    // console.log(`Rider id from service ${id}`);
 
     const driver = await Driver.findById(id)
-    console.log("driver by id service", driver);
+    // console.log("driver by id service", driver);
 
     return driver
 }
