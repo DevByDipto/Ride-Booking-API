@@ -4,7 +4,7 @@ import { AppError } from "../../utils/AppError";
 import { jwtHelpers } from "../../utils/jwt";
 import { Rider } from "../rider/rider.model";
 import { IUser, Role, TAdminUpdate } from "./user.interface";
-import { User } from "./user.model";
+import { User } from "./user.model"; 
 import bcrypt from "bcryptjs";
 import { Driver } from "../driver/driver.model";
 
