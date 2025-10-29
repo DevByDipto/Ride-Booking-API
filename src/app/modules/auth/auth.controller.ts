@@ -89,26 +89,41 @@ return sendResponse(res, {
 
 const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
 // console.log();
-
-   res.clearCookie('accessToken', {
-    httpOnly: true,
+res.cookie('accessToken',"", {
+ httpOnly: true,
     secure: true,
     sameSite: "none",
-  //  path: '/',
-  // encode: String,
-  expires: new Date(0),
+    maxAge: 0,
+    path: '/',
+})
 
-  })
-
-  res.clearCookie('refreshToken',{
-    httpOnly: true,
+res.cookie('refreshToken',"", {
+ httpOnly: true,
     secure: true,
     sameSite: "none",
-  //  path: '/',
-  // encode: String,
-  expires: new Date(0),
+    maxAge: 0,
+    path: '/',
+})
 
-  })
+  //  res.clearCookie('accessToken', {
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: "none",
+  // //  path: '/',
+  // // encode: String,
+  // expires: new Date(0),
+
+  // })
+
+  // res.clearCookie('refreshToken',{
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: "none",
+  // //  path: '/',
+  // // encode: String,
+  // expires: new Date(0),
+
+  // })
 //  console.log('Response headers:', res.getHeaders());
    sendResponse(res, {
         success: true,
