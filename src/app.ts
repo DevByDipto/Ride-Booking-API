@@ -14,7 +14,7 @@ export const app = express()
 
 
 app.use(cors({
-    origin: "https://lively-ganache-03dd6f.netlify.app",
+    origin: "http://localhost:5173",
      // ✅ নির্দিষ্ট করে দাও
     credentials: true,
   //   allowedHeaders: ['Content-Type', 'Authorization'],
