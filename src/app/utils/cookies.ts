@@ -24,7 +24,7 @@ res.cookie('accessToken', tokenInfo.accessToken, {
 res.cookie('refreshToken', tokenInfo.refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none" ,
+    sameSite: "none",
   //  path: '/',
   // encode: String,
 

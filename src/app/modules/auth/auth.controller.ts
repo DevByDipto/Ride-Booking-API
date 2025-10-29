@@ -96,6 +96,7 @@ const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) =>
     sameSite: "none",
   //  path: '/',
   // encode: String,
+  expires: new Date(0),
 
   })
 
@@ -105,6 +106,7 @@ const logout = catchAsync(async(req:Request, res:Response, next:NextFunction) =>
     sameSite: "none",
   //  path: '/',
   // encode: String,
+  expires: new Date(0),
 
   })
 //  console.log('Response headers:', res.getHeaders());
