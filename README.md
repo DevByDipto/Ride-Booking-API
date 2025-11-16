@@ -106,7 +106,7 @@ src/
  <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr>
  <tr> <td>GET</td> <td>/api/auth/google-login</td> <td>Login with Google (OAuth Redirect)</td> <td>❌</td> <td>-</td> </tr>
  <tr> <td>POST</td> <td>/api/auth/login</td> <td>Login with email & password</td> <td>❌</td> <td>-</td> </tr>
- <tr> <td>POST</td> <td>/api/auth/refresh-token</td> <td>Generate new access token using refresh token</td> <td>❌</td> <td>-</td> </tr>
+ <tr> <td>POST</td> <td>/api/auth/refresh-token</td> <td>Generate new access token using refresh token</td> <td>✅</td> <td>-</td> </tr>
  <tr> <td>POST</td> <td>/api/auth/logout</td> <td>Logout user</td> <td>❌</td> <td>-</td> </tr>
 </table>
 ---
