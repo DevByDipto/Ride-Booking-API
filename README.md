@@ -72,7 +72,13 @@ src/
 ```
  <h2>📬 API Endpoints</h2>
  <h3>User Routes</h3>
-<table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> <tr> <td>POST</td> <td>/api/user/register</td> <td>Create new user (Register)</td> <td>❌</td> <td>-</td> </tr> <tr> <td>GET</td> <td>/api/user</td> <td>Get all users</td> <td>✅</td> <td>Admin</td> </tr> <tr> <td>PATCH</td> <td>/api/user/:id/updateAdmin</td> <td>Update user to Admin</td> <td>✅</td> <td>Admin</td> </tr> <tr> <td>GET</td> <td>/api/user/me</td> <td>Get own profile</td> <td>✅</td> <td>All Roles (Admin, Rider, Driver, User)</td> </tr> </table>
+<table border="1" cellpadding="5" cellspacing="0"> 
+ <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr>
+ <tr> <td>POST</td> <td>/api/user/register</td> <td>Create new user (Register)</td> <td>❌</td> <td>-</td> </tr>
+ <tr> <td>GET</td> <td>/api/user</td> <td>Get all users</td> <td>✅</td> <td>Admin</td> </tr> 
+ <tr> <td>PATCH</td> <td>/api/user/:id/updateAdmin</td> <td>Update user to Admin</td> <td>✅</td> <td>Admin</td> </tr>
+ <tr> <td>GET</td> <td>/api/user/me</td> <td>Get own profile</td> <td>✅</td> <td>Admin, Rider, Driver</td> </tr> 
+</table>
 ---
 <h3>🧍‍♂️ Rider Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0"> 
