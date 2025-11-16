@@ -110,6 +110,7 @@ src/
  <tr> <td>POST</td> <td>/api/auth/logout</td> <td>Logout user</td> <td>❌</td> <td>-</td> </tr>
 </table>
 ---
+
 ### Setup instructions
 #### 1️⃣ Clone the Repository
 
