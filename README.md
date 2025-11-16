@@ -35,13 +35,11 @@ It provides secure authentication, ride management, and role-based APIs for mana
 ---
 
 ## 🧰 Tech Stack
+- Backend: Node.js, Express.js
+- Database: MongoDB with Mongoose
+- Authentication: JWT Authentication & Google OAuth
+- Language: TypeScript
 
-- **Node.js** + **Express.js**
-- **MongoDB (Mongoose)**
-- **JWT Authentication**
-- **bcrypt**
-- **dotenv**
-- **cors**
 
 ---
 
