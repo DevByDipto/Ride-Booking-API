@@ -49,22 +49,32 @@ It provides secure authentication, ride management, and role-based APIs for mana
 src/
 ├── config/
 │   ├── db.ts             # MongoDB connection
-│   └── env.ts            # Environment variable setup
+│   └── env.ts            # Environment variable setup       
 │
 ├── middlewares/
 │   ├── auth.ts           # JWT verification middleware
 │   └── errorHandler.ts   # Global error handler
+│   └── notFount.ts
+│   └── paginateMiddleware.ts
+│   └── validateRequest.ts  
 │
 ├── modules/
 │   ├── auth/             # login/signup routes
 │   ├── rides/            # ride CRUD and logic
 │   ├── users/            # user management
 │   └── drivers/          # driver management
+│   └── ride/             # ride management
 │
 ├── utils/
-│   └── response.ts       # standard API response helper
+│   └── sendResponse.ts       # standard API response helper
+│   └── appError.ts
+│   └── catchAsync.ts
+│   └── cookies.ts
+│   └── jwt.ts
+│   └── paginate.ts
+│   └── userToken.ts 
 │
-├── index.ts              # App entry point
+├── server.ts              # App entry point
 └── app.ts                # Express app setup
 
 ```
