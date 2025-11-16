@@ -100,7 +100,15 @@ src/
  <tr> <td>GET</td> <td>/api/ride/:id</td> <td>Get ride by ID</td> <td>✅</td> <td>Admin, Rider, Driver</td> </tr> 
  <tr> <td>PATCH</td> <td>/api/ride/:id</td> <td>Update ride by ID</td> <td>✅</td> <td>Rider, Driver</td> </tr>
 </table>
- 
+---
+ <h3>🔐 Auth Routes</h3>
+<table border="1" cellpadding="5" cellspacing="0">
+ <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr>
+ <tr> <td>GET</td> <td>/api/auth/google-login</td> <td>Login with Google (OAuth Redirect)</td> <td>❌</td> <td>-</td> </tr>
+ <tr> <td>POST</td> <td>/api/auth/login</td> <td>Login with email & password</td> <td>❌</td> <td>-</td> </tr>
+ <tr> <td>POST</td> <td>/api/auth/refresh-token</td> <td>Generate new access token using refresh token</td> <td>❌</td> <td>-</td> </tr>
+ <tr> <td>POST</td> <td>/api/auth/logout</td> <td>Logout user</td> <td>❌</td> <td>-</td> </tr>
+</table>
 ---
 ### Setup instructions
 #### 1️⃣ Clone the Repository
