@@ -81,7 +81,7 @@ src/
 </table>
 ---
 <h3>🚗 Driver Routes</h3>
-<table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> <tr> <td>PATCH</td> <td>/api/driver/:id/status</td> <td>Update driver status (usually approve/reject)</td> <td>✅</td> <td>Unknown (Token Required)</td> </tr> <tr> <td>PATCH</td> <td>/api/driver/:id/status</td> <td>Update driver availability</td> <td>✅</td> <td>Unknown (Token Required)</td> </tr> <tr> <td>GET</td> <td>/api/driver</td> <td>Get all drivers</td> <td>❌</td> <td>-</td> </tr> <tr> <td>GET</td> <td>/api/driver/:id</td> <td>Get driver by ID</td> <td>❌</td> <td>-</td> </tr> </table>
+<table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> <tr> <td>GET</td> <td>/api/driver</td> <td>Get all drivers</td> <td>✅</td> <td>Admin</td> </tr> <tr> <td>GET</td> <td>/api/driver/:driverId</td> <td>Get driver by ID</td> <td>✅</td> <td>Driver</td> </tr> <tr> <td>PATCH</td> <td>/api/driver/:driverId/approval-status</td> <td>Update driver approval status</td> <td>✅</td> <td>Admin</td> </tr> <tr> <td>PATCH</td> <td>/api/driver/:driverId</td> <td>Update driver profile</td> <td>✅</td> <td>Driver</td> </tr> </table>
 ---
 <h3>🧍‍♂️ Rider Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0"> 
