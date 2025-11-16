@@ -70,6 +70,8 @@ src/
 └── app.ts                # Express app setup
 
 ```
+---
+
  <h2>📬 API Endpoints</h2>
  <h3>👤 User Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0"> 
@@ -79,10 +81,10 @@ src/
  <tr> <td>PATCH</td> <td>/api/user/:id/updateAdmin</td> <td>Update user to Admin</td> <td>✅</td> <td>Admin</td> </tr>
  <tr> <td>GET</td> <td>/api/user/me</td> <td>Get own profile</td> <td>✅</td> <td>Admin, Rider, Driver</td> </tr> 
 </table>
----
+
 <h3>🚗 Driver Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> <tr> <td>GET</td> <td>/api/driver</td> <td>Get all drivers</td> <td>✅</td> <td>Admin</td> </tr> <tr> <td>GET</td> <td>/api/driver/:driverId</td> <td>Get driver by ID</td> <td>✅</td> <td>Driver</td> </tr> <tr> <td>PATCH</td> <td>/api/driver/:driverId/approval-status</td> <td>Update driver approval status</td> <td>✅</td> <td>Admin</td> </tr> <tr> <td>PATCH</td> <td>/api/driver/:driverId</td> <td>Update driver profile</td> <td>✅</td> <td>Driver</td> </tr> </table>
----
+
 <h3>🧍‍♂️ Rider Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0"> 
  <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> 
@@ -91,7 +93,7 @@ src/
  <tr> <td>GET</td> <td>/api/rider?isBlocked=true</td> <td>Get all blocked riders</td> <td>✅</td> <td>Admin</td> </tr>
  <tr> <td>PATCH</td> <td>/api/rider/:id</td> <td>Update rider by ID</td> <td>✅</td> <td>Admin, Rider</td> </tr>
 </table>
----
+
 <h3>🚕 Ride Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0">
  <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr>
@@ -100,7 +102,7 @@ src/
  <tr> <td>GET</td> <td>/api/ride/:id</td> <td>Get ride by ID</td> <td>✅</td> <td>Admin, Rider, Driver</td> </tr> 
  <tr> <td>PATCH</td> <td>/api/ride/:id</td> <td>Update ride by ID</td> <td>✅</td> <td>Rider, Driver</td> </tr>
 </table>
----
+
  <h3>🔐 Auth Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0">
  <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr>
