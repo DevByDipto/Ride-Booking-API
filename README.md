@@ -71,11 +71,15 @@ src/
 
 ```
  <h2>📬 API Endpoints</h2>
+ <h3>🧍‍♂️ User Routes</h3>
+ <table border="1" cellpadding="5" cellspacing="0">
+  <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> <tr> <td>GET</td> <td>/api/user</td> <td>Get all users</td> <td>❌</td> <td>-</td> </tr> <tr> <td>POST</td> <td>/api/user/register</td> <td>Create a new user (Register)</td> <td>❌</td> <td>-</td> </tr> </table>
 <h3>🧍‍♂️ Rider Routes</h3>
 <table border="1" cellpadding="5" cellspacing="0"> 
  <tr> <th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th><th>Role</th> </tr> 
  <tr> <td>GET</td> <td>/api/rider</td> <td>Get all riders</td> <td>✅</td> <td>Admin</td> </tr>
  <tr> <td>GET</td> <td>/api/rider/:id</td> <td>Get rider by ID</td> <td>✅</td> <td>Rider</td> </tr> 
+ <tr> <td>GET</td> <td>/api/rider?isBlocked=true</td> <td>Get all blocked riders</td> <td>✅</td> <td>Admin</td> </tr>
  <tr> <td>PATCH</td> <td>/api/rider/:id</td> <td>Update rider by ID</td> <td>✅</td> <td>Admin, Rider</td> </tr>
 </table>
  
