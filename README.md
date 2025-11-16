@@ -158,3 +158,9 @@ JWT_REFRESH_EXPIRES=1d
 npm run dev
 ```
 ---
+#### 🧪 Testing
+You can test the API using [Postman](https://www.postman.com) Use the Bearer token in headers to access protected routes:
+```
+Authorization: Bearer <your_jwt_token>
+```
+
