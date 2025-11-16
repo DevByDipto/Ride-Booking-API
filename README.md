@@ -70,6 +70,8 @@ src/
 └── app.ts                # Express app setup
 
 ```
+ <h2>📬 API Endpoints</h2>
+ 
 ---
 ### Setup instructions
 #### 1️⃣ Clone the Repository
